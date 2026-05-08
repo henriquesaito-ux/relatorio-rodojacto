@@ -653,7 +653,6 @@ function ReportMode() {
       <ChecklistsSection />
       <AntesDepoisSection />
       <AgenteCTA />
-      <Footer />
     </>
   );
 }

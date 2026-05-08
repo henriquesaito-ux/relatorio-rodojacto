@@ -744,16 +744,16 @@ const AGENT_PILARES = [
     key: 'A', label: 'Aquisição',
     borderColor: 'border-amber-500/15', bgColor: 'bg-amber-500/[0.04]', labelColor: 'text-amber-300',
     agents: [
-      { id: 'nico', name: 'Nico', role: 'Gestor de Estoque',  avatar: 'assets/agentes/avatar-nico.png' },
-      { id: 'zeca', name: 'Zeca', role: 'Compras e Neg.',      avatar: 'assets/agentes/avatar-zeca.png' },
-      { id: 'bino', name: 'Bino', role: 'Aprov. de Orçam.',    avatar: 'assets/agentes/avatar-bino.png' },
+      { id: 'nico', name: 'Nico', role: 'Cotação',        avatar: 'assets/agentes/avatar-nico.png' },
+      { id: 'zeca', name: 'Zeca', role: 'Negociação',     avatar: 'assets/agentes/avatar-zeca.png' },
+      { id: 'bino', name: 'Bino', role: 'Compras',        avatar: 'assets/agentes/avatar-bino.png' },
     ],
   },
   {
-    key: 'X', label: 'Cross D · M · A',
+    key: 'X', label: 'Cross D · M · A', hideKey: true,
     borderColor: 'border-rose-500/20', bgColor: 'bg-rose-500/[0.04]', labelColor: 'text-rose-300',
     agents: [
-      { id: 'clara', name: 'Clara', role: 'Conformidade de Processo', avatar: 'assets/agentes/avatar-clara.png' },
+      { id: 'clara', name: 'Clara', role: 'Conformidade', avatar: 'assets/agentes/avatar-clara.png' },
     ],
   },
 ];
@@ -766,27 +766,28 @@ function AgentCard({ a, isHighlighted, showcase }) {
 
   if (showcase) {
     // In showcase mode: active agents full color, inactive ones dimmed + grayscale + dashed border
+    if (isActive) {
+      return (
+        <div className="relative rounded-xl p-3 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.08] border border-brand-500/30 shadow-[0_0_16px_rgba(16,185,129,0.12)]" style={{ width: 100 }}>
+          <div className="w-16 h-16 rounded-full overflow-hidden mb-2 ring-2 ring-brand-500 ring-offset-2 ring-offset-[#1c1917]">
+            <img src={a.avatar} alt={a.name} className="w-full h-full object-cover" />
+          </div>
+          <div className="text-xs font-semibold leading-tight text-white">{a.name}</div>
+          <div className="text-[9px] leading-tight mt-0.5 text-stone-300">{a.role}</div>
+          <div className="mt-2 text-[7px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-500/20 text-white flex items-center gap-1">
+            <span className="w-1 h-1 rounded-full bg-brand-400" />Em operação
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className={`relative rounded-xl p-2.5 flex flex-col items-center text-center transition-all shrink-0 ${
-        isActive
-          ? 'bg-white/[0.08] border border-brand-500/30 shadow-[0_0_16px_rgba(16,185,129,0.12)]'
-          : 'bg-white/[0.03] border border-dashed border-white/10'
-      }`} style={{ width: 80 }}>
-        <div className={`w-11 h-11 rounded-full overflow-hidden mb-1.5 ${isActive ? 'ring-2 ring-brand-500 ring-offset-1 ring-offset-[#1c1917]' : ''}`}>
+      <div className="relative rounded-xl p-2.5 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.03] border border-dashed border-white/10" style={{ width: 80 }}>
+        <div className="w-11 h-11 rounded-full overflow-hidden mb-1.5">
           <img src={a.avatar} alt={a.name} className="w-full h-full object-cover" />
         </div>
         <div className="text-[11px] font-semibold leading-tight text-white">{a.name}</div>
         <div className="text-[8px] leading-tight mt-0.5 text-stone-300">{a.role}</div>
-        {isActive && (
-          <div className="mt-1.5 text-[7px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-brand-500/20 text-white flex items-center gap-1">
-            <span className="w-1 h-1 rounded-full bg-brand-400" />Em operação
-          </div>
-        )}
-        {!isActive && (
-          <div className="mt-1.5 text-[7px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-white/5 text-stone-300 flex items-center gap-1">
-            <span className="w-1 h-1 rounded-full border border-stone-400" />Em construção
-          </div>
-        )}
       </div>
     );
   }
@@ -813,7 +814,7 @@ function AgentCard({ a, isHighlighted, showcase }) {
 
 function AgentTeamOrganogram({ highlightId, showcase }) {
   return (
-    <div className="flex flex-col gap-3 w-full max-w-[420px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-[700px]">
       {AGENT_PILARES.map((pilar) => {
         const activeCount = showcase ? pilar.agents.filter(a => ACTIVE_AGENTS.includes(a.id)).length : 0;
         const totalCount = pilar.agents.length;
@@ -822,13 +823,8 @@ function AgentTeamOrganogram({ highlightId, showcase }) {
             className={`rounded-xl border ${pilar.borderColor} ${pilar.bgColor} p-3`}>
             <div className="flex items-center justify-between mb-3">
               <div className={`text-[10px] font-bold uppercase tracking-[0.15em] ${pilar.labelColor}`}>
-                {pilar.key} · {pilar.label}
+                {pilar.hideKey ? pilar.label : `${pilar.key} · ${pilar.label}`}
               </div>
-              {showcase && (
-                <span className={`text-[8px] font-medium tabular-nums ${activeCount > 0 ? 'text-brand-500' : 'text-stone-500'}`}>
-                  {activeCount}/{totalCount} {totalCount === 1 ? 'ativo' : 'ativos'}
-                </span>
-              )}
             </div>
             <div className="flex gap-2 flex-wrap justify-center">
               {pilar.agents.map((a) => (
@@ -934,86 +930,28 @@ function AgenteCover({ eyebrow, title, titleAccent, subtitle, description, highl
 
 // ── Main Agent Section ──
 function AgenteCTA() {
-  const [view, setView] = useStateE('team'); // 'team' | 'cover' | 'results'
-  const [tab, setTab] = useStateE('visao');
-  const tabs = [
-    { key: 'visao', label: 'Visão Geral' },
-    { key: 'macro', label: 'Por Macro' },
-    { key: 'placa', label: 'Por Placa' },
-  ];
-
-  const scrollToTop = () => {
-    const el = document.getElementById('agente');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  const goTo = (v) => { setView(v); scrollToTop(); };
-
   return (
-    <section id="agente" className="scroll-mt-20 px-5 md:px-8 py-12 md:py-16" style={{ backgroundColor: '#1c1917' }}>
-      <div className="max-w-6xl mx-auto">
-
-        {/* Nível 1 — Capa institucional do Time Rabbot */}
-        {view === 'team' && (
-          <AgenteCover
-            eyebrow="Time Rabbot · Em construção"
-            title="Com o piloto, demos o primeiro passo rumo a uma operação"
-            titleAccent="toda gerida por IA."
-            subtitle="Conheça o futuro time da operação da Rodojacto. Começamos pelo Agente de Disponibilidade — o primeiro colaborador de IA já em campo."
-            description="O Time Rabbot é a nossa visão para gestão de frota: 9 agentes especialistas organizados em 3 pilares — Disponibilidade, Manutenção e Aquisição — mais 1 agente cross de conformidade. Quando completo, vai cobrir as 6 jornadas da frota 24/7, equivalendo a 9 FTEs por uma fração do custo. A manutenção e aquisição de peças já rodam na plataforma Rabbot de forma tradicional. A disponibilidade já conta com o primeiro colaborador de IA da Rodojacto — controlando a frota em tempo real. Estamos construindo esse time agente por agente, em parceria com nossos clientes."
-            highlights={[
-              { label: '1 já em campo', desc: 'Agente de Disponibilidade — primeiro colaborador de IA da Rodojacto', icon: <IconCheck size={18} strokeWidth={1.5} /> },
-              { label: '8 em construção', desc: 'Manutenção, Aquisição e Cross no roadmap ativo', icon: <IconWrench size={18} strokeWidth={1.5} /> },
-              { label: 'Construído com clientes', desc: 'Cada agente nasce de uma operação real', icon: <IconUsers size={18} strokeWidth={1.5} /> },
-            ]}
-            ctaLabel="Conhecer o agente que já está em operação"
-            onClickCta={() => goTo('cover')}
-            showcase
-          />
-        )}
-
-        {/* Nível 2 — Capa do Agente de Disponibilidade */}
-        {view === 'cover' && (
-          <AgenteCover
-            eyebrow="Agente 1 · Disponibilidade"
-            title="Agente de"
-            titleAccent="Disponibilidade"
-            subtitle="Monitora as macros da frota em tempo real e aciona motorista, gestores e torre de controle no WhatsApp quando algum processo atrasa."
-            description="Cada minuto que um veículo fica parado além do esperado é receita perdida. O Agente de Disponibilidade acompanha as macros de todos os caminhões 24/7 e, no momento em que um processo passa do tempo previsto, aciona automaticamente os envolvidos: motorista no WhatsApp, gestores e torre de controle — antes que o atraso vire prejuízo."
-            highlights={[
-              { label: 'Lê as macros em tempo real', desc: 'Acompanha cada caminhão da frota 24/7', icon: <IconChart size={18} strokeWidth={1.5} /> },
-              { label: 'Detecta atrasos nos processos', desc: 'Identifica quando algo passa do tempo previsto', icon: <IconAlert size={18} strokeWidth={1.5} /> },
-              { label: 'Aciona quem precisa agir', desc: 'Motorista no WhatsApp, gestores e torre de controle', icon: <IconMessage size={18} strokeWidth={1.5} /> },
-            ]}
-            ctaLabel="Ver resultados"
-            onClickCta={() => goTo('results')}
-            secondaryCtaLabel="Ver agente"
-            secondaryCtaHref="https://rabbot-agent-rodojacto.lovable.app/"
-            period="Período do teste: 12/03/2026 a 05/04/2026 · Rodojacto"
-            onBack={() => goTo('team')}
-            backLabel="Voltar para Time Rabbot"
-            soloAgent={{ name: 'Marco', role: 'Monitor de Disponibilidade', avatar: 'assets/agentes/avatar-marco.png' }}
-          />
-        )}
-
-        {/* Nível 3 — Resultados */}
-        {view === 'results' && (
-          <div>
-            <button onClick={() => goTo('cover')}
-              className="inline-flex items-center gap-1.5 text-sm text-stone-500 hover:text-white transition mb-6">
-              <IconChevLeft size={14} strokeWidth={1.5} />
-              Sobre o agente
-            </button>
-
-            <iframe
-              src="https://rabbot-relatorio-agente-disponibilidade.lovable.app/?id=69cc049f95346de3a4e3d935"
-              className="w-full border-0 rounded-lg"
-              style={{ height: '100vh' }}
-              allowFullScreen
-            />
+    <section id="agente" className="scroll-mt-20 px-5 md:px-8 py-16 md:py-24" style={{ backgroundColor: '#1c1917' }}>
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <Reveal>
+          <div className="text-center mb-12">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-500 mb-6">Time Rabbot</div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.12] text-white mb-6">
+              Um time de IA que trabalha <span className="text-brand-500">24 horas por dia, 7 dias por semana</span> para a sua operação.
+            </h2>
+            <p className="text-base md:text-lg text-stone-400 leading-relaxed max-w-2xl mx-auto">
+              Realizamos um piloto com um dos nossos agentes e em poucos dias já temos resultados. Vamos apresentar tudo na nossa próxima conversa.
+            </p>
           </div>
-        )}
+        </Reveal>
 
+        {/* Agent organogram */}
+        <Reveal delay={200}>
+          <div className="flex justify-center">
+            <AgentTeamOrganogram showcase />
+          </div>
+        </Reveal>
       </div>
     </section>
   );
