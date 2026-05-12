@@ -100,12 +100,72 @@ function DeckProblema({ active }) {
             </div>
           </SlideReveal>
 
+          {/* Barra de Maturidade */}
           <SlideReveal active={active} delay={450}>
-            <div className="border-t border-stone-200/70 pt-5 text-center">
-              <p className="text-base md:text-lg font-semibold text-ink leading-snug">
-                Cada carreta parada &eacute; frete perdido.<br />
-                <span className="text-red-600">Voc&ecirc; tem 250 ativos sem visibilidade agora.</span>
-              </p>
+            <div className="pt-4">
+              <div className="mb-1.5">
+                <h3 className="text-sm font-semibold text-ink">Maturidade de Gest&atilde;o Operacional</h3>
+                <p className="text-[10px] text-muted">Rumo a uma gest&atilde;o exponencial</p>
+              </div>
+
+              {/* Barra de progresso */}
+              <div className="relative mt-4 mb-6" style={{ paddingTop: '36px' }}>
+                {/* Track */}
+                <div className="h-2.5 rounded-full bg-stone-200 w-full" />
+                {/* Preenchimento até Proativo (~66%) */}
+                <div className="absolute left-0 h-2.5 rounded-full" style={{ width: '66%', top: '36px', background: 'linear-gradient(90deg, #dc2626, #ea580c, #d97706, #f59e0b)' }} />
+
+                {/* Dots nos estágios */}
+                {[
+                  { pos: '0%', filled: true },
+                  { pos: '33%', filled: true },
+                  { pos: '66%', filled: true, active: true },
+                  { pos: '100%', filled: false },
+                ].map(function(s, i) { return (
+                  <div key={i} className="absolute" style={{ left: s.pos, top: '36px', transform: 'translate(-50%, -3px)' }}>
+                    <div className={'w-4 h-4 rounded-full border-2 border-white ' + (s.active ? 'ring-4 ring-amber-100' : '') + ' ' + (s.filled ? 'bg-amber-500' : 'bg-stone-300')} />
+                  </div>
+                ); })}
+
+                {/* Marcador Rodojacto */}
+                <div className="absolute flex flex-col items-center" style={{ left: '66%', transform: 'translateX(-50%)', top: '-2px' }}>
+                  <img src="assets/rodojacto-logo.png" alt="Rodojacto" style={{ height: '20px' }} />
+                </div>
+
+                {/* Marcador Clientes Rabbot */}
+                <div className="absolute flex flex-col items-center" style={{ left: '100%', transform: 'translateX(-50%)', top: '0px' }}>
+                  <span className="text-[9px] font-semibold text-green-700 border border-dashed border-green-500 bg-green-50 px-2.5 py-0.5 rounded-full whitespace-nowrap">Clientes Rabbot</span>
+                </div>
+              </div>
+
+              {/* Cards descritivos dos 4 modelos */}
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                {[
+                  { title: 'Modelo Reativo', desc: 'Processos 100% anal\u00f3gicos, checklists de papel, telefone e e-mails, sem controle de processos nem visibilidade da opera\u00e7\u00e3o.' },
+                  { title: 'Modelo Adaptativo', desc: 'Controles de processos feitos por checklists de papel e planilhas de Excel alimentadas de forma manual.' },
+                  { title: 'Modelo Proativo', desc: 'Controles de processos feitos em ERPs e/ou outros sistemas, com dados coletados manual/digitalmente e visibilidade em tempo real, com baixo grau de automa\u00e7\u00e3o.', active: true },
+                  { title: 'Modelo Preditivo', desc: 'Integra\u00e7\u00e3o das informa\u00e7\u00f5es de checklists digitais e sistemas, garantindo vis\u00e3o 360\u00b0 da opera\u00e7\u00e3o e atualiza\u00e7\u00f5es em tempo real, com alto grau de automa\u00e7\u00e3o, incluindo decis\u00f5es automatizadas.' },
+                ].map(function(m, i) { return (
+                  <div key={i} className={'border rounded-lg p-3 ' + (m.active ? 'border-green-400 bg-green-50/30' : 'border-stone-200/70 bg-white')}>
+                    <div className={'text-[11px] font-semibold mb-1 ' + (m.active ? 'text-green-700' : 'text-ink')}>{m.title}</div>
+                    <div className="text-[9px] text-muted leading-relaxed">{m.desc}</div>
+                  </div>
+                ); })}
+              </div>
+
+              {/* Meta */}
+              <div className="text-center mt-2">
+                <p className="text-[11px] text-muted">
+                  <span className="font-semibold text-ink">Meta:</span> Avan&ccedil;ar da gest&atilde;o <span className="font-semibold text-ink">Proativa</span> para uma opera&ccedil;&atilde;o <span className="font-semibold text-green-600">Preditiva</span>, automatizada e integrada.
+                </p>
+              </div>
+
+              <div className="border-t border-stone-200/70 pt-4 mt-4 text-center">
+                <p className="text-base md:text-lg font-semibold text-ink leading-snug">
+                  Cada carreta parada &eacute; frete perdido.<br />
+                  <span className="text-red-600">Voc&ecirc; tem 250 ativos sem visibilidade agora.</span>
+                </p>
+              </div>
             </div>
           </SlideReveal>
         </div>
@@ -129,8 +189,9 @@ function DeckJornada({ active }) {
     { step: 'Aguardando Carregamento', time: '~4h', tag: 'SEM CONTROLE', tone: 'red' },
     { step: 'Em Tr\u00e2nsito (Volta)', time: '~vari\u00e1vel', tag: 'SISTEMA', tone: 'gray' },
     { step: 'Chegada na Base', time: '~30min', tag: 'SISTEMA', tone: 'gray' },
-    { step: 'Classifica\u00e7\u00e3o Dispon\u00edvel', time: '~2h', tag: 'SEM CONTROLE', tone: 'red' },
-    { step: 'Indispon\u00edvel (Manuten\u00e7\u00e3o)', time: '~vari\u00e1vel', tag: 'MANUAL', tone: 'darkred' },
+    { step: 'Classifica\u00e7\u00e3o com apontamento manual', time: '~2h', tag: 'MANUAL', tone: 'darkred' },
+    { step: 'Classifica\u00e7\u00e3o Dispon\u00edvel', time: '~1h', tag: 'SEM CONTROLE', tone: 'red' },
+    { step: 'Classifica\u00e7\u00e3o Indispon\u00edvel (Manuten\u00e7\u00e3o)', time: '~vari\u00e1vel', tag: 'MANUAL', tone: 'darkred' },
   ];
   var rabbot = [
     { step: 'Rastreio Autom\u00e1tico', tag: 'Auto' },
@@ -143,7 +204,7 @@ function DeckJornada({ active }) {
   return (
     <div className="flex-1 flex flex-col bg-bg">
       <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-6">
-        <div className="max-w-[1100px] w-full mx-auto">
+        <div className="max-w-[1400px] w-full mx-auto">
           <SlideEyebrow active={active} delay={0}>Como mudamos o ciclo</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
@@ -159,7 +220,7 @@ function DeckJornada({ active }) {
                 <span className="w-2 h-2 rounded-full bg-red-500" />
                 <span className="text-[10px] font-bold uppercase tracking-wider text-ink">Ciclo Atual</span>
               </div>
-              <div className="grid grid-cols-8 gap-1.5">
+              <div className="grid grid-cols-9 gap-1.5">
                 {hoje.map(function(s, i) {
                   return (
                     <div key={i} className="bg-white border border-red-200/70 rounded-lg px-1.5 py-2.5 text-center">
@@ -220,7 +281,7 @@ function DeckJornada({ active }) {
                 ); })}
               </div>
               <div className="text-center mt-3">
-                <span className="text-[10px] text-muted">~2 dias &middot; visibilidade total &middot; status autom&aacute;tico</span>
+                <span className="text-[10px] text-muted">visibilidade total &middot; status autom&aacute;tico</span>
               </div>
             </div>
           </div>
@@ -263,7 +324,7 @@ function DeckSolucao({ active }) {
         {/* Right: dashboard charts recreated */}
         <div className="flex flex-col gap-3 p-4 min-h-0 overflow-hidden" style={{ background: '#f5f5f4' }}>
 
-          {/* D — Evolu&ccedil;&atilde;o da Disponibilidade (SVG) */}
+          {/* D — Evolução da Disponibilidade + Big Numbers */}
           <SlideReveal active={active} delay={200} className="min-h-0 flex-1">
             <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden shadow-sm h-full flex flex-col p-3">
               <div className="flex items-center justify-between mb-2 shrink-0">
@@ -271,49 +332,72 @@ function DeckSolucao({ active }) {
                   <span className="w-5 h-5 rounded flex items-center justify-center text-white text-[9px] font-bold" style={{ background: '#479C4A' }}>D</span>
                   <span className="text-[11px] font-semibold text-ink">Evolu&ccedil;&atilde;o da disponibilidade</span>
                 </div>
-                <div className="flex items-center gap-0 border border-stone-200 rounded-md overflow-hidden">
-                  <span className="text-[9px] font-semibold text-white px-2.5 py-0.5" style={{ background: '#479C4A' }}>Semana</span>
-                  <span className="text-[9px] font-medium text-muted px-2.5 py-0.5 bg-white">M&ecirc;s</span>
-                </div>
               </div>
-              {(function() {
-                var bars = [
-                  { d: 62, label: '01/03' }, { d: 63, label: '02/03' }, { d: 64, label: '09/03' },
-                  { d: 68, label: '16/03' }, { d: 68, label: '23/03' }, { d: 69, label: '30/03' },
-                  { d: 70, label: '06/04' }, { d: 70, label: '13/04' }, { d: 72, label: '20/04' },
-                  { d: 71, label: '27/04' }, { d: 70, label: '04/05' }, { d: 69, label: '11/05' },
-                ];
-                var W = 700, H = 180, left = 30, right = 4, top = 4, bottom = 16;
-                var chartW = W - left - right;
-                var chartH = H - top - bottom;
-                var gap = 30;
-                var bw = (chartW - (bars.length - 1) * gap) / bars.length;
-                var ticks = [0, 25, 50, 75, 100];
-                return (
-                  <svg viewBox={'0 0 ' + W + ' ' + H} className="flex-1 w-full min-h-0" preserveAspectRatio="xMidYMid meet">
-                    {ticks.map(function(t) {
-                      var yy = top + chartH - (t / 100) * chartH;
-                      return React.createElement('g', { key: 'tick-' + t },
-                        React.createElement('line', { x1: left, x2: left + chartW, y1: yy, y2: yy, stroke: '#e7e5e4', strokeWidth: 0.5 }),
-                        React.createElement('text', { x: left - 4, y: yy + 3, fontSize: '7', fill: '#78716c', textAnchor: 'end' }, t + '%')
-                      );
-                    })}
-                    {bars.map(function(b, i) {
-                      var x = left + i * (bw + gap);
-                      var greenH = (b.d / 100) * chartH;
-                      var redH = chartH - greenH;
-                      return React.createElement('g', { key: i },
-                        React.createElement('rect', { x: x, y: top, width: bw, height: redH, fill: '#C93D3D' }),
-                        React.createElement('rect', { x: x, y: top + redH, width: bw, height: greenH, fill: '#479C4A' }),
-                        React.createElement('text', { x: x + bw / 2, y: top + chartH + 11, textAnchor: 'middle', fontSize: '7', fill: '#78716c' }, b.label)
-                      );
-                    })}
-                  </svg>
-                );
-              })()}
-              <div className="flex items-center justify-center gap-4 mt-1 shrink-0">
-                <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#479C4A' }}/>Disponibilidade</span>
-                <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#C93D3D' }}/>Indisponibilidade</span>
+              <div className="flex-1 flex gap-2 min-h-0">
+                {/* Gráfico à esquerda */}
+                <div className="flex-[3] flex flex-col min-h-0">
+                  {(function() {
+                    var bars = [
+                      { d: 62, label: '01/03' }, { d: 63, label: '02/03' }, { d: 64, label: '09/03' },
+                      { d: 68, label: '16/03' }, { d: 68, label: '23/03' }, { d: 69, label: '30/03' },
+                      { d: 70, label: '06/04' }, { d: 70, label: '13/04' }, { d: 72, label: '20/04' },
+                    ];
+                    var W = 400, H = 180, left = 30, right = 4, top = 4, bottom = 16;
+                    var chartW = W - left - right;
+                    var chartH = H - top - bottom;
+                    var gap = 20;
+                    var bw = (chartW - (bars.length - 1) * gap) / bars.length;
+                    var ticks = [0, 25, 50, 75, 100];
+                    return (
+                      <svg viewBox={'0 0 ' + W + ' ' + H} className="flex-1 w-full min-h-0" preserveAspectRatio="xMidYMid meet">
+                        {ticks.map(function(t) {
+                          var yy = top + chartH - (t / 100) * chartH;
+                          return React.createElement('g', { key: 'tick-' + t },
+                            React.createElement('line', { x1: left, x2: left + chartW, y1: yy, y2: yy, stroke: '#e7e5e4', strokeWidth: 0.5 }),
+                            React.createElement('text', { x: left - 4, y: yy + 3, fontSize: '7', fill: '#78716c', textAnchor: 'end' }, t + '%')
+                          );
+                        })}
+                        {bars.map(function(b, i) {
+                          var x = left + i * (bw + gap);
+                          var greenH = (b.d / 100) * chartH;
+                          var redH = chartH - greenH;
+                          return React.createElement('g', { key: i },
+                            React.createElement('rect', { x: x, y: top, width: bw, height: redH, fill: '#C93D3D' }),
+                            React.createElement('rect', { x: x, y: top + redH, width: bw, height: greenH, fill: '#479C4A' }),
+                            React.createElement('text', { x: x + bw / 2, y: top + chartH + 11, textAnchor: 'middle', fontSize: '7', fill: '#78716c' }, b.label)
+                          );
+                        })}
+                      </svg>
+                    );
+                  })()}
+                  <div className="flex items-center justify-center gap-4 mt-1 shrink-0">
+                    <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#479C4A' }}/>Disponibilidade</span>
+                    <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#C93D3D' }}/>Indisponibilidade</span>
+                  </div>
+                </div>
+                {/* Big numbers à direita */}
+                <div className="grid grid-cols-2 gap-1.5 flex-[2] content-center">
+                  <div className="border border-stone-200/70 rounded-lg p-2">
+                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Disponibilidade</div>
+                    <div className="text-base font-bold" style={{ color: '#479C4A' }}>72,2%</div>
+                    <div className="text-[7px] text-muted">Meta vs atual</div>
+                  </div>
+                  <div className="border border-stone-200/70 rounded-lg p-2">
+                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Indisponibilidade</div>
+                    <div className="text-base font-bold text-red-500">27,8%</div>
+                    <div className="text-[7px] text-muted">Tempo em manuten&ccedil;&atilde;o</div>
+                  </div>
+                  <div className="border border-stone-200/70 rounded-lg p-2">
+                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Utiliza&ccedil;&atilde;o</div>
+                    <div className="text-base font-bold text-ink">33,0%</div>
+                    <div className="text-[7px] text-muted">Tempo em viagem</div>
+                  </div>
+                  <div className="border border-stone-200/70 rounded-lg p-2">
+                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Ocioso</div>
+                    <div className="text-base font-bold text-red-500">39,1%</div>
+                    <div className="text-[7px] text-muted">Tempo dispon&iacute;vel</div>
+                  </div>
+                </div>
               </div>
             </div>
           </SlideReveal>
