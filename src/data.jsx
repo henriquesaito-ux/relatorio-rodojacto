@@ -264,7 +264,7 @@ const BEFORE_AFTER = [
 
 // Projeção
 function projectarFrota(pctMigrada) {
-  const totalAtivos = 125;
+  const totalAtivos = 250;
   const migrados = Math.round((pctMigrada / 100) * totalAtivos);
   const economiaMes = migrados * 1850;
   const horasMes = migrados * 3.4;

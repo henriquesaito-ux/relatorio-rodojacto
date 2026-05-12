@@ -2,8 +2,8 @@
 const { useState: useStateC, useEffect: useEffectC, useRef: useRefC } = React;
 
 // Radar chart: 4 axes, value 0..5
-function RadarChart({ data, size = 360 }) {
-  const pad = 60;
+function RadarChart({ data, size = 360, pad: padProp }) {
+  const pad = padProp || 90;
   const full = size + pad * 2;
   const cx = full / 2, cy = full / 2;
   const R = size * 0.38;
@@ -55,10 +55,15 @@ function RadarChart({ data, size = 360 }) {
     let anchor = 'middle';
     if (x < cx - 5) anchor = 'end';
     else if (x > cx + 5) anchor = 'start';
+    const words = d.label.split(' ');
+    const mid = Math.ceil(words.length / 2);
+    const lines = words.length > 3 ? [words.slice(0, mid).join(' '), words.slice(mid).join(' ')] : [d.label];
     return (
       <text key={i} x={x} y={y} textAnchor={anchor} dominantBaseline="middle"
             fontSize="11" fontWeight="500" fill="#64748b">
-        {d.label}
+        {lines.map((line, li) => (
+          <tspan key={li} x={x} dy={li === 0 ? (lines.length > 1 ? '-0.6em' : 0) : '1.2em'}>{line}</tspan>
+        ))}
       </text>
     );
   });
@@ -67,10 +72,10 @@ function RadarChart({ data, size = 360 }) {
     <svg ref={ref} viewBox={`0 0 ${full} ${full}`} className="w-full max-w-[420px] mx-auto">
       {gridPolys}
       {axesLines}
-      <polygon points={dataPts} fill="#059669" fillOpacity="0.14" stroke="#059669" strokeWidth="1.5" strokeLinejoin="round" />
+      <polygon points={dataPts} fill="#d97706" fillOpacity="0.15" stroke="#d97706" strokeWidth="1.5" strokeLinejoin="round" />
       {data.map((d, i) => {
         const [x, y] = pointAt(i, d.value * animated);
-        return <circle key={i} cx={x} cy={y} r="3" fill="#059669" stroke="#fff" strokeWidth="1.5" />;
+        return <circle key={i} cx={x} cy={y} r="3" fill="#d97706" stroke="#fff" strokeWidth="1.5" />;
       })}
       {labels}
       {Array.from({ length: levels }, (_, i) => {
@@ -142,8 +147,8 @@ function LineChart({ data, width = 720, height = 260, format = v => v }) {
            }}>
         <defs>
           <linearGradient id="area-grad" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#10b981" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+            <stop offset="0%" stopColor="#479C4A" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#479C4A" stopOpacity="0" />
           </linearGradient>
         </defs>
         {ticks.map((t, i) => (
@@ -158,11 +163,11 @@ function LineChart({ data, width = 720, height = 260, format = v => v }) {
           <text key={i} x={x(i)} y={height - 10} textAnchor="middle" fontSize="10" fill="#94a3b8">{d.mes}</text>
         ))}
         <path d={area} fill="url(#area-grad)" />
-        <path d={path} fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={path} fill="none" stroke="#3d863f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         {hover !== null && (
           <g>
-            <line x1={x(hover)} x2={x(hover)} y1={pad.top} y2={pad.top + H} stroke="#059669" strokeDasharray="3 3" strokeWidth="1" />
-            <circle cx={x(hover)} cy={y(data[hover].acum * animated)} r="4" fill="#059669" stroke="#fff" strokeWidth="1.5" />
+            <line x1={x(hover)} x2={x(hover)} y1={pad.top} y2={pad.top + H} stroke="#3d863f" strokeDasharray="3 3" strokeWidth="1" />
+            <circle cx={x(hover)} cy={y(data[hover].acum * animated)} r="4" fill="#3d863f" stroke="#fff" strokeWidth="1.5" />
           </g>
         )}
       </svg>
@@ -194,10 +199,10 @@ function MiniLine({ data, width = 600, height = 180 }) {
       {data.map((d, i) => (
         <text key={`l${i}`} x={x(i)} y={height - 8} textAnchor="middle" fontSize="10" fill="#94a3b8">{d.week}</text>
       ))}
-      <path d={path} fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d={path} fill="none" stroke="#3d863f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {data.map((d, i) => (
         <g key={i}>
-          <circle cx={x(i)} cy={y(d.n)} r="3" fill="#fff" stroke="#059669" strokeWidth="1.5" />
+          <circle cx={x(i)} cy={y(d.n)} r="3" fill="#fff" stroke="#3d863f" strokeWidth="1.5" />
           <text x={x(i)} y={y(d.n) - 9} textAnchor="middle" fontSize="10" fontWeight="500" fill="#0f172a">{d.n}</text>
         </g>
       ))}

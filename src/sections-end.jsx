@@ -86,7 +86,7 @@ function ComposicaoChart() {
         return (
           <React.Fragment key={i}>
             <rect x={x} y={h - ph} width={bw} height={ph} rx={2} fill="#78716c" />
-            <rect x={x} y={h - ph - ah} width={bw} height={ah} rx={0} fill="#059669" />
+            <rect x={x} y={h - ph - ah} width={bw} height={ah} rx={0} fill="#3d863f" />
             <rect x={x} y={h - ph - ah - eh} width={bw} height={eh} rx={2} fill="#d97706" />
             <text x={x + bw / 2} y={h + 16} textAnchor="middle" className="text-[10px]" fill="#a8a29e">{labels[i]}</text>
           </React.Fragment>
@@ -128,12 +128,12 @@ function EvolucaoChart() {
         );
       })}
       <polyline points={line(semAgente)} fill="none" stroke="#78716c" strokeWidth="2" strokeDasharray="6,4" />
-      <polyline points={line(comAgente)} fill="none" stroke="#10b981" strokeWidth="2.5" />
+      <polyline points={line(comAgente)} fill="none" stroke="#479C4A" strokeWidth="2.5" />
       {semAgente.map((v, i) => (
         <circle key={`s${i}`} cx={ox + i * pw} cy={oy + h - (v / max) * h} r="4" fill="#1c1917" stroke="#78716c" strokeWidth="1.5" />
       ))}
       {comAgente.map((v, i) => (
-        <circle key={`c${i}`} cx={ox + i * pw} cy={oy + h - (v / max) * h} r="4" fill="#1c1917" stroke="#10b981" strokeWidth="2" />
+        <circle key={`c${i}`} cx={ox + i * pw} cy={oy + h - (v / max) * h} r="4" fill="#1c1917" stroke="#479C4A" strokeWidth="2" />
       ))}
       {weeks.map((wk, i) => (
         <React.Fragment key={i}>
@@ -144,7 +144,7 @@ function EvolucaoChart() {
       {/* Legend */}
       <circle cx={ox + 40} cy={h + oy + 50} r="3" fill="none" stroke="#78716c" strokeWidth="1.5" />
       <text x={ox + 48} y={h + oy + 54} className="text-[10px]" fill="#a8a29e">Sem agente</text>
-      <circle cx={ox + 140} cy={h + oy + 50} r="3" fill="none" stroke="#10b981" strokeWidth="2" />
+      <circle cx={ox + 140} cy={h + oy + 50} r="3" fill="none" stroke="#479C4A" strokeWidth="2" />
       <text x={ox + 148} y={h + oy + 54} className="text-[10px]" fill="#a8a29e">Com agente</text>
     </svg>
   );
@@ -193,7 +193,7 @@ function AgenteVisaoGeral() {
           <ComposicaoChart />
           <div className="flex items-center gap-4 mt-3 text-[10px] text-stone-400">
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#78716c' }} />Pernoite</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#059669' }} />Almoço</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#3d863f' }} />Almoço</span>
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#d97706' }} />Eventual</span>
           </div>
         </DC>
@@ -732,7 +732,7 @@ const AGENT_PILARES = [
   },
   {
     key: 'M', label: 'Manutenção',
-    borderColor: 'border-blue-500/15', bgColor: 'bg-blue-500/[0.04]', labelColor: 'text-blue-300',
+    borderColor: 'border-white/[0.06]', bgColor: 'bg-white/[0.02]', labelColor: 'text-stone-500',
     agents: [
       { id: 'bia',   name: 'Bia',   role: 'Manut. Preventiva',  avatar: 'assets/agentes/avatar-bia.png' },
       { id: 'vitor', name: 'Vitor', role: 'Auditor de Manut.',   avatar: 'assets/agentes/avatar-vitor.png' },
@@ -742,7 +742,7 @@ const AGENT_PILARES = [
   },
   {
     key: 'A', label: 'Aquisição',
-    borderColor: 'border-amber-500/15', bgColor: 'bg-amber-500/[0.04]', labelColor: 'text-amber-300',
+    borderColor: 'border-white/[0.06]', bgColor: 'bg-white/[0.02]', labelColor: 'text-stone-500',
     agents: [
       { id: 'nico', name: 'Nico', role: 'Cotação',        avatar: 'assets/agentes/avatar-nico.png' },
       { id: 'zeca', name: 'Zeca', role: 'Negociação',     avatar: 'assets/agentes/avatar-zeca.png' },
@@ -751,7 +751,7 @@ const AGENT_PILARES = [
   },
   {
     key: 'X', label: 'Cross D · M · A', hideKey: true,
-    borderColor: 'border-rose-500/20', bgColor: 'bg-rose-500/[0.04]', labelColor: 'text-rose-300',
+    borderColor: 'border-white/[0.06]', bgColor: 'bg-white/[0.02]', labelColor: 'text-stone-500',
     agents: [
       { id: 'clara', name: 'Clara', role: 'Conformidade', avatar: 'assets/agentes/avatar-clara.png' },
     ],
@@ -768,26 +768,26 @@ function AgentCard({ a, isHighlighted, showcase }) {
     // In showcase mode: active agents full color, inactive ones dimmed + grayscale + dashed border
     if (isActive) {
       return (
-        <div className="relative rounded-xl p-3 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.08] border border-brand-500/30 shadow-[0_0_16px_rgba(16,185,129,0.12)]" style={{ width: 100 }}>
-          <div className="w-16 h-16 rounded-full overflow-hidden mb-2 ring-2 ring-brand-500 ring-offset-2 ring-offset-[#1c1917]">
+        <div className="relative rounded-xl p-4 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.08] border border-brand-500/30 shadow-[0_0_24px_rgba(16,185,129,0.18)]" style={{ width: 130 }}>
+          <div className="w-20 h-20 rounded-full overflow-hidden mb-2.5 ring-2 ring-brand-500 ring-offset-2 ring-offset-[#1c1917]">
             <img src={a.avatar} alt={a.name} className="w-full h-full object-cover" />
           </div>
-          <div className="text-xs font-semibold leading-tight text-white">{a.name}</div>
-          <div className="text-[9px] leading-tight mt-0.5 text-stone-300">{a.role}</div>
-          <div className="mt-2 text-[7px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-500/20 text-white flex items-center gap-1">
-            <span className="w-1 h-1 rounded-full bg-brand-400" />Em operação
+          <div className="text-sm font-semibold leading-tight text-white">{a.name}</div>
+          <div className="text-[10px] leading-tight mt-0.5 text-stone-300">{a.role}</div>
+          <div className="mt-2.5 text-[8px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-brand-500/20 text-white flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />Em operação
           </div>
         </div>
       );
     }
 
     return (
-      <div className="relative rounded-xl p-2.5 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.03] border border-dashed border-white/10" style={{ width: 80 }}>
-        <div className="w-11 h-11 rounded-full overflow-hidden mb-1.5">
+      <div className="relative rounded-xl p-2.5 flex flex-col items-center text-center transition-all shrink-0 bg-white/[0.02] border border-dashed border-white/[0.06] opacity-40" style={{ width: 80 }}>
+        <div className="w-11 h-11 rounded-full overflow-hidden mb-1.5 grayscale">
           <img src={a.avatar} alt={a.name} className="w-full h-full object-cover" />
         </div>
-        <div className="text-[11px] font-semibold leading-tight text-white">{a.name}</div>
-        <div className="text-[8px] leading-tight mt-0.5 text-stone-300">{a.role}</div>
+        <div className="text-[11px] font-semibold leading-tight text-stone-500">{a.name}</div>
+        <div className="text-[8px] leading-tight mt-0.5 text-stone-600">{a.role}</div>
       </div>
     );
   }

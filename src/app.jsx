@@ -546,7 +546,8 @@ function SlideWrap({ children, bg = 'bg-bg' }) {
 // ═══════════════════════════════════════
 //  Slide definitions — same sections as the report
 // ═══════════════════════════════════════
-const SLIDES = [
+// Deck executivo (8 slides — arco Bruno)
+const SLIDES = typeof DECK_SLIDES !== 'undefined' ? DECK_SLIDES : [
   { key: 'cover',        title: 'Capa',           render: () => <SlideCover active={true} /> },
   { key: 'sobre',        title: 'Sobre',          render: () => <SlideWrap bg="bg-white">{typeof SobreSection !== 'undefined' ? <SobreSection /> : null}</SlideWrap> },
   { key: 'diag',         title: 'Diagnóstico',    render: () => <SlideWrap bg="bg-white"><DiagSection /></SlideWrap> },
@@ -604,19 +605,9 @@ function PresentationMode({ onExit }) {
         })}
       </div>
 
-      {/* Slide counter — top right, glass pill */}
-      <div className="fixed top-4 right-5 z-50 glass rounded-full px-3 py-1.5 slide-number text-[11px] font-mono text-subink">
-        {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
-      </div>
+      {/* Slide counter removed */}
 
-      {/* Exit button — top left, glass */}
-      <button
-        onClick={onExit}
-        className="fixed top-4 left-5 z-50 w-8 h-8 rounded-full glass flex items-center justify-center text-muted hover:text-ink transition"
-        title="Voltar (Esc)"
-      >
-        <IconX size={14} strokeWidth={1.5} />
-      </button>
+      {/* Exit button removed */}
 
       {/* Side arrows */}
       {current > 0 && (
@@ -683,27 +674,27 @@ function ModeSelector({ onSelect }) {
           <p className="text-sm text-muted mb-6">Escolha como deseja visualizar</p>
           <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto">
             <button
+              onClick={() => onSelect('presentation')}
+              className="group bg-white border-2 border-brand-200 rounded-xl p-6 text-left hover:border-brand-400 hover:shadow-hover transition-all card-hover ring-1 ring-brand-100"
+            >
+              <div className="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mb-4">
+                <IconLayout size={20} strokeWidth={1.5} className="text-brand-700" />
+              </div>
+              <div className="text-base font-semibold text-ink tracking-tight">Deck Executivo</div>
+              <p className="mt-1.5 text-xs text-subink leading-relaxed">
+                8 slides para a reunião com o Aukar. Ideal para apresentar ao vivo.
+              </p>
+            </button>
+            <button
               onClick={() => onSelect('report')}
               className="group bg-white border border-stone-200/70 rounded-xl p-6 text-left hover:border-stone-300 hover:shadow-hover transition-all card-hover"
             >
               <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mb-4 group-hover:bg-brand-50 transition">
                 <IconFile size={20} strokeWidth={1.5} className="text-stone-600 group-hover:text-brand-700 transition" />
               </div>
-              <div className="text-base font-semibold text-ink tracking-tight">Modo Relatório</div>
+              <div className="text-base font-semibold text-ink tracking-tight">Relatório Completo</div>
               <p className="mt-1.5 text-xs text-subink leading-relaxed">
-                Página completa com scroll. Ideal para leitura detalhada.
-              </p>
-            </button>
-            <button
-              onClick={() => onSelect('presentation')}
-              className="group bg-white border border-stone-200/70 rounded-xl p-6 text-left hover:border-stone-300 hover:shadow-hover transition-all card-hover"
-            >
-              <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mb-4 group-hover:bg-brand-50 transition">
-                <IconLayout size={20} strokeWidth={1.5} className="text-stone-600 group-hover:text-brand-700 transition" />
-              </div>
-              <div className="text-base font-semibold text-ink tracking-tight">Modo Apresentação</div>
-              <p className="mt-1.5 text-xs text-subink leading-relaxed">
-                Slides navegáveis. Ideal para reuniões ao vivo.
+                Página com scroll. Ideal para leitura detalhada depois da reunião.
               </p>
             </button>
           </div>
@@ -721,28 +712,12 @@ function ModeSelector({ onSelect }) {
 //  App root
 // ═══════════════════════════════════════
 function App() {
-  const [presMode, setPresMode] = useStateApp(false);
-
   useEffectApp(() => {
-    document.body.style.overflow = presMode ? 'hidden' : '';
-    if (presMode) window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
-  }, [presMode]);
+  }, []);
 
-  if (presMode) return <PresentationMode onExit={() => setPresMode(false)} />;
-
-  return (
-    <>
-      <ReportMode />
-      <button
-        onClick={() => setPresMode(true)}
-        className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full bg-stone-200/80 hover:bg-stone-300 hidden md:flex items-center justify-center text-stone-600 hover:text-ink transition shadow-sm"
-        title="Modo apresentação"
-      >
-        <IconLayout size={18} strokeWidth={1.5} />
-      </button>
-    </>
-  );
+  return <PresentationMode onExit={() => {}} />;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
