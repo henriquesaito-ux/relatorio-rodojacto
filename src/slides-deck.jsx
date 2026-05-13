@@ -57,117 +57,144 @@ function DeckCapa({ active }) {
 function DeckProblema({ active }) {
   return (
     <div className="flex-1 flex flex-col overflow-y-auto bg-white">
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-5">
-        <div className="max-w-[1200px] w-full mx-auto">
-          <SlideEyebrow active={active} delay={0}>Diagn&oacute;stico</SlideEyebrow>
-          <SlideReveal active={active} delay={80}>
-            <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.1] text-ink mb-1">
-              O que a opera&ccedil;&atilde;o da <span className="font-bold">Rodojacto</span> revela hoje
-            </h2>
-          </SlideReveal>
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-14 py-5">
+        <div className="w-full mx-auto" style={{ maxWidth: '1440px' }}>
+          <div className="flex items-stretch">
 
-          <SlideReveal active={active} delay={180}>
-            <div className="grid grid-cols-3 gap-2 mb-4">
-              {[
-                { tag: 'DISPONIBILIDADE', value: '250', unit: 'ativos', sub: 'sem visibilidade em tempo real' },
-                { tag: 'SISTEMAS', value: '3', unit: 'desconectados', sub: 'BTime + MO + SAP' },
-                { tag: 'AUTOMA\u00c7\u00c3O', value: '0', unit: '', sub: 'visibilidade em tempo real' },
-              ].map(function(k, i) { return (
-                <div key={i} className="rounded-lg border border-red-200 bg-red-50/50 px-3 py-2.5 text-center">
-                  <div className="text-[8px] font-bold uppercase tracking-wider text-red-500 mb-1">{k.tag}</div>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-2xl font-bold text-ink tabular-nums tracking-tight">{k.value}</span>
-                    {k.unit && <span className="text-[11px] text-muted">{k.unit}</span>}
-                  </div>
-                  <div className="text-[10px] text-muted mt-0.5">{k.sub}</div>
-                </div>
-              ); })}
-            </div>
-          </SlideReveal>
-
-          <SlideReveal active={active} delay={300}>
-            <div className="grid grid-cols-2 gap-3 mb-5">
-              {[
-                { tag: 'CUSTO OCULTO', title: 'Carretas paradas sem alerta', desc: 'Carretas no bols\u00e3o Jato ou no p\u00e1tio do cliente \u2014 sem notifica\u00e7\u00e3o, sem prazo, sem cobran\u00e7a.' },
-                { tag: 'DADO N\u00c3O CONFI\u00c1VEL', title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '\u201cO rastreador diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda.\u201d \u2014 Alessandro' },
-              ].map(function(d, i) { return (
-                <div key={i} className="border border-stone-200/70 rounded-lg px-4 py-3">
-                  <div className="text-[8px] font-bold uppercase tracking-wider text-red-500 mb-1">{d.tag}</div>
-                  <div className="text-sm font-bold text-ink mb-0.5">{d.title}</div>
-                  <p className="text-xs text-muted leading-snug">{d.desc}</p>
-                </div>
-              ); })}
-            </div>
-          </SlideReveal>
-
-          {/* Barra de Maturidade */}
-          <SlideReveal active={active} delay={450}>
-            <div className="pt-4">
-              <div className="mb-1.5">
-                <h3 className="text-sm font-semibold text-ink">Maturidade de Gest&atilde;o Operacional</h3>
-                <p className="text-[10px] text-muted">Rumo a uma gest&atilde;o exponencial</p>
-              </div>
-
-              {/* Barra de progresso */}
-              <div className="relative mt-4 mb-6" style={{ paddingTop: '36px' }}>
-                {/* Track */}
-                <div className="h-2.5 rounded-full bg-stone-200 w-full" />
-                {/* Preenchimento até Proativo (~66%) */}
-                <div className="absolute left-0 h-2.5 rounded-full" style={{ width: '66%', top: '36px', background: 'linear-gradient(90deg, #dc2626, #ea580c, #d97706, #f59e0b)' }} />
-
-                {/* Dots nos estágios */}
-                {[
-                  { pos: '0%', filled: true },
-                  { pos: '33%', filled: true },
-                  { pos: '66%', filled: true, active: true },
-                  { pos: '100%', filled: false },
-                ].map(function(s, i) { return (
-                  <div key={i} className="absolute" style={{ left: s.pos, top: '36px', transform: 'translate(-50%, -3px)' }}>
-                    <div className={'w-4 h-4 rounded-full border-2 border-white ' + (s.active ? 'ring-4 ring-amber-100' : '') + ' ' + (s.filled ? 'bg-amber-500' : 'bg-stone-300')} />
-                  </div>
-                ); })}
-
-                {/* Marcador Rodojacto */}
-                <div className="absolute flex flex-col items-center" style={{ left: '66%', transform: 'translateX(-50%)', top: '-2px' }}>
-                  <img src="assets/rodojacto-logo.png" alt="Rodojacto" style={{ height: '20px' }} />
-                </div>
-
-                {/* Marcador Clientes Rabbot */}
-                <div className="absolute flex flex-col items-center" style={{ left: '100%', transform: 'translateX(-50%)', top: '0px' }}>
-                  <span className="text-[9px] font-semibold text-green-700 border border-dashed border-green-500 bg-green-50 px-2.5 py-0.5 rounded-full whitespace-nowrap">Clientes Rabbot</span>
-                </div>
-              </div>
-
-              {/* Cards descritivos dos 4 modelos */}
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {[
-                  { title: 'Modelo Reativo', desc: 'Processos 100% anal\u00f3gicos, checklists de papel, telefone e e-mails, sem controle de processos nem visibilidade da opera\u00e7\u00e3o.' },
-                  { title: 'Modelo Adaptativo', desc: 'Controles de processos feitos por checklists de papel e planilhas de Excel alimentadas de forma manual.' },
-                  { title: 'Modelo Proativo', desc: 'Controles de processos feitos em ERPs e/ou outros sistemas, com dados coletados manual/digitalmente e visibilidade em tempo real, com baixo grau de automa\u00e7\u00e3o.', active: true },
-                  { title: 'Modelo Preditivo', desc: 'Integra\u00e7\u00e3o das informa\u00e7\u00f5es de checklists digitais e sistemas, garantindo vis\u00e3o 360\u00b0 da opera\u00e7\u00e3o e atualiza\u00e7\u00f5es em tempo real, com alto grau de automa\u00e7\u00e3o, incluindo decis\u00f5es automatizadas.' },
-                ].map(function(m, i) { return (
-                  <div key={i} className={'border rounded-lg p-3 ' + (m.active ? 'border-green-400 bg-green-50/30' : 'border-stone-200/70 bg-white')}>
-                    <div className={'text-[11px] font-semibold mb-1 ' + (m.active ? 'text-green-700' : 'text-ink')}>{m.title}</div>
-                    <div className="text-[9px] text-muted leading-relaxed">{m.desc}</div>
-                  </div>
-                ); })}
-              </div>
-
-              {/* Meta */}
-              <div className="text-center mt-2">
-                <p className="text-[11px] text-muted">
-                  <span className="font-semibold text-ink">Meta:</span> Avan&ccedil;ar da gest&atilde;o <span className="font-semibold text-ink">Proativa</span> para uma opera&ccedil;&atilde;o <span className="font-semibold text-green-600">Preditiva</span>, automatizada e integrada.
+            {/* ── COLUNA ESQUERDA (~38%) — Manchete ── */}
+            <div className="flex flex-col justify-center pr-8" style={{ flex: '0 0 38%' }}>
+              <SlideEyebrow active={active} delay={0}>Diagn&oacute;stico</SlideEyebrow>
+              <SlideReveal active={active} delay={80}>
+                <h2 className="font-semibold tracking-tight text-ink leading-[1.08] mb-3" style={{ fontSize: 'clamp(26px, 3vw, 40px)', letterSpacing: '-0.02em' }}>
+                  Cada carreta parada &eacute; frete perdido.
+                </h2>
+                <p className="text-lg md:text-xl font-semibold text-red-600 leading-snug mb-6">
+                  Voc&ecirc; tem 250 ativos sem visibilidade agora.
                 </p>
-              </div>
+              </SlideReveal>
 
-              <div className="border-t border-stone-200/70 pt-4 mt-4 text-center">
-                <p className="text-base md:text-lg font-semibold text-ink leading-snug">
-                  Cada carreta parada &eacute; frete perdido.<br />
-                  <span className="text-red-600">Voc&ecirc; tem 250 ativos sem visibilidade agora.</span>
-                </p>
-              </div>
+              <SlideReveal active={active} delay={250}>
+                <div className="space-y-3.5">
+                  {[
+                    { text: 'SLA descumprido sem que ningu\u00e9m saiba em tempo real' },
+                    { text: 'Decis\u00f5es tomadas com dado que n\u00e3o reflete a opera\u00e7\u00e3o real' },
+                    { text: 'Carretas saem da oficina e somem do radar \u2014 frota fantasma' },
+                  ].map(function(b, i) { return (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <svg className="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#fef2f2"/><path d="M8 4.5v4M8 10.5v.5" stroke="#dc2626" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                      <span className="text-[13px] text-muted leading-snug">{b.text}</span>
+                    </div>
+                  ); })}
+                </div>
+              </SlideReveal>
             </div>
-          </SlideReveal>
+
+            {/* ── Divider vertical ── */}
+            <div className="w-px bg-stone-200/70 flex-shrink-0" />
+
+            {/* ── COLUNA DIREITA (~60%) — Dados de diagnóstico ── */}
+            <div className="flex-1 flex flex-col justify-between min-w-0 pl-10 py-2">
+              <SlideReveal active={active} delay={120}>
+                <p className="text-xs font-medium text-muted uppercase tracking-wider mb-4">O que a opera&ccedil;&atilde;o revela hoje</p>
+              </SlideReveal>
+
+              {/* 3 cards de métricas */}
+              <SlideReveal active={active} delay={180}>
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  {[
+                    { tag: 'DISPONIBILIDADE', value: '250', unit: 'ativos', sub: 'sem visibilidade em tempo real' },
+                    { tag: 'SISTEMAS', value: '3', unit: 'desconectados', sub: 'BTime + MO + SAP' },
+                    { tag: 'AUTOMA\u00c7\u00c3O', value: '0', unit: '', sub: 'visibilidade em tempo real' },
+                  ].map(function(k, i) { return (
+                    <div key={i} className="rounded-lg border border-red-200 bg-red-50/50 px-3 py-4 text-center">
+                      <div className="text-[9px] font-bold uppercase tracking-wider text-red-500 mb-1">{k.tag}</div>
+                      <div className="flex items-baseline justify-center gap-1">
+                        <span className="text-2xl font-bold text-ink tabular-nums tracking-tight">{k.value}</span>
+                        {k.unit && <span className="text-[11px] text-muted">{k.unit}</span>}
+                      </div>
+                      <div className="text-[10px] text-muted mt-1">{k.sub}</div>
+                    </div>
+                  ); })}
+                </div>
+              </SlideReveal>
+
+              {/* 2 cards de alertas */}
+              <SlideReveal active={active} delay={300}>
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  {[
+                    { tag: 'CUSTO OCULTO', title: 'Carretas paradas sem alerta', desc: 'Carretas no bols\u00e3o Jato ou no p\u00e1tio do cliente \u2014 sem notifica\u00e7\u00e3o, sem prazo, sem cobran\u00e7a.' },
+                    { tag: 'DADO N\u00c3O CONFI\u00c1VEL', title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '\u201cO rastreador diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda.\u201d \u2014 Alessandro' },
+                  ].map(function(d, i) { return (
+                    <div key={i} className="border border-stone-200/70 rounded-lg px-4 py-3.5">
+                      <div className="text-[9px] font-bold uppercase tracking-wider text-red-500 mb-1">{d.tag}</div>
+                      <div className="text-sm font-bold text-ink mb-1">{d.title}</div>
+                      <p className="text-xs text-muted leading-snug">{d.desc}</p>
+                    </div>
+                  ); })}
+                </div>
+              </SlideReveal>
+
+              {/* Barra de Maturidade */}
+              <SlideReveal active={active} delay={450}>
+                <div className="pt-2">
+                  <div className="mb-2">
+                    <h3 className="text-sm font-semibold text-ink">Maturidade de Gest&atilde;o Operacional</h3>
+                    <p className="text-[10px] text-muted">Rumo a uma gest&atilde;o exponencial</p>
+                  </div>
+
+                  {/* Barra de progresso */}
+                  <div className="relative mt-5 mb-7" style={{ paddingTop: '32px' }}>
+                    <div className="h-2.5 rounded-full bg-stone-200 w-full" />
+                    <div className="absolute left-0 h-2.5 rounded-full" style={{ width: '66%', top: '32px', background: 'linear-gradient(90deg, #dc2626, #ea580c, #d97706, #f59e0b)' }} />
+
+                    {[
+                      { pos: '0%', filled: true },
+                      { pos: '33%', filled: true },
+                      { pos: '66%', filled: true, active: true },
+                      { pos: '100%', filled: false },
+                    ].map(function(s, i) { return (
+                      <div key={i} className="absolute" style={{ left: s.pos, top: '32px', transform: 'translate(-50%, -3px)' }}>
+                        <div className={'w-4 h-4 rounded-full border-2 border-white ' + (s.active ? 'ring-4 ring-amber-100' : '') + ' ' + (s.filled ? 'bg-amber-500' : 'bg-stone-300')} />
+                      </div>
+                    ); })}
+
+                    {/* Marcador Rodojacto */}
+                    <div className="absolute flex flex-col items-center" style={{ left: '66%', transform: 'translateX(-50%)', top: '-4px' }}>
+                      <img src="assets/rodojacto-logo.png" alt="Rodojacto" style={{ height: '18px' }} />
+                    </div>
+
+                    {/* Marcador Clientes Rabbot */}
+                    <div className="absolute flex flex-col items-center" style={{ left: '100%', transform: 'translateX(-50%)', top: '-1px' }}>
+                      <span className="text-[9px] font-semibold text-green-700 border border-dashed border-green-500 bg-green-50 px-2.5 py-0.5 rounded-full whitespace-nowrap">Clientes Rabbot</span>
+                    </div>
+                  </div>
+
+                  {/* Cards descritivos dos 4 modelos */}
+                  <div className="grid grid-cols-4 gap-2 mb-4">
+                    {[
+                      { title: 'Modelo Reativo', desc: 'Processos 100% anal\u00f3gicos, checklists de papel, telefone e e-mails, sem controle de processos nem visibilidade da opera\u00e7\u00e3o.' },
+                      { title: 'Modelo Adaptativo', desc: 'Controles de processos feitos por checklists de papel e planilhas de Excel alimentadas de forma manual.' },
+                      { title: 'Modelo Proativo', desc: 'Controles de processos feitos em ERPs e/ou outros sistemas, com dados coletados manual/digitalmente e visibilidade em tempo real, com baixo grau de automa\u00e7\u00e3o.', active: true },
+                      { title: 'Modelo Preditivo', desc: 'Integra\u00e7\u00e3o das informa\u00e7\u00f5es de checklists digitais e sistemas, garantindo vis\u00e3o 360\u00b0 da opera\u00e7\u00e3o e atualiza\u00e7\u00f5es em tempo real, com alto grau de automa\u00e7\u00e3o, incluindo decis\u00f5es automatizadas.' },
+                    ].map(function(m, i) { return (
+                      <div key={i} className={'border rounded-lg p-3 ' + (m.active ? 'border-green-400 bg-green-50/30' : 'border-stone-200/70 bg-white')}>
+                        <div className={'text-[11px] font-semibold mb-1 ' + (m.active ? 'text-green-700' : 'text-ink')}>{m.title}</div>
+                        <div className="text-[9px] text-muted leading-relaxed">{m.desc}</div>
+                      </div>
+                    ); })}
+                  </div>
+
+                  {/* Meta */}
+                  <div className="text-center mt-3">
+                    <p className="text-[11px] text-muted">
+                      <span className="font-semibold text-ink">Meta:</span> Avan&ccedil;ar da gest&atilde;o <span className="font-semibold text-ink">Proativa</span> para uma opera&ccedil;&atilde;o <span className="font-semibold text-green-600">Preditiva</span>, automatizada e integrada.
+                    </p>
+                  </div>
+                </div>
+              </SlideReveal>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -305,12 +332,13 @@ function DeckSolucao({ active }) {
         <div className="flex flex-col justify-center px-10 lg:px-14">
           <SlideEyebrow active={active} delay={0}>Solu&ccedil;&atilde;o &middot; D &middot; M &middot; A</SlideEyebrow>
           <SlideReveal active={active} delay={100}>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Menos tempo na oficina,<br />mais tempo na estrada.
+            <h2 className="font-bold tracking-tight leading-[1.05]" style={{ fontSize: 'clamp(28px, 3.2vw, 44px)', letterSpacing: '-0.03em' }}>
+              <span style={{ color: '#9ca3af' }}>Menos tempo na oficina,</span><br />
+              <span className="text-brand-600">mais tempo na estrada.</span>
             </h2>
           </SlideReveal>
           <SlideReveal active={active} delay={150}>
-            <p className="text-base font-semibold text-brand-600 mb-2">
+            <p className="text-lg font-medium text-brand-600 mt-5 mb-3">
               Simples de ver. F&aacute;cil de agir.
             </p>
           </SlideReveal>
@@ -324,81 +352,209 @@ function DeckSolucao({ active }) {
         {/* Right: dashboard charts recreated */}
         <div className="flex flex-col gap-3 p-4 min-h-0 overflow-hidden" style={{ background: '#f5f5f4' }}>
 
-          {/* D — Evolução da Disponibilidade + Big Numbers */}
+          {/* D — Evolução da Disponibilidade (line) + Disponibilidade por Unidade (scatter) */}
           <SlideReveal active={active} delay={200} className="min-h-0 flex-1">
-            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden shadow-sm h-full flex flex-col p-3">
-              <div className="flex items-center justify-between mb-2 shrink-0">
-                <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded flex items-center justify-center text-white text-[9px] font-bold" style={{ background: '#479C4A' }}>D</span>
-                  <span className="text-[11px] font-semibold text-ink">Evolu&ccedil;&atilde;o da disponibilidade</span>
-                </div>
-              </div>
-              <div className="flex-1 flex gap-2 min-h-0">
-                {/* Gráfico à esquerda */}
-                <div className="flex-[3] flex flex-col min-h-0">
-                  {(function() {
-                    var bars = [
-                      { d: 62, label: '01/03' }, { d: 63, label: '02/03' }, { d: 64, label: '09/03' },
-                      { d: 68, label: '16/03' }, { d: 68, label: '23/03' }, { d: 69, label: '30/03' },
-                      { d: 70, label: '06/04' }, { d: 70, label: '13/04' }, { d: 72, label: '20/04' },
-                    ];
-                    var W = 400, H = 180, left = 30, right = 4, top = 4, bottom = 16;
-                    var chartW = W - left - right;
-                    var chartH = H - top - bottom;
-                    var gap = 20;
-                    var bw = (chartW - (bars.length - 1) * gap) / bars.length;
-                    var ticks = [0, 25, 50, 75, 100];
-                    return (
-                      <svg viewBox={'0 0 ' + W + ' ' + H} className="flex-1 w-full min-h-0" preserveAspectRatio="xMidYMid meet">
+            <div className="grid grid-cols-2 gap-3 h-full min-h-0">
+
+              {/* ── GRÁFICO 1: Line chart multi-série ── */}
+              {(function() {
+                var fixedIdx = 4; // 23/03/26 — tooltip sempre visível
+                var dates = ['01/03/26','02/03/26','09/03/26','16/03/26','23/03/26','30/03/26','06/04/26','13/04/26','20/04/26','27/04/26','04/05/26','11/05/26'];
+                var series = [
+                  { key: 'disp', label: 'Disponibilidade', color: '#22c55e', data: [58,60,65.5,63,67.6,66,68,70,69,68,71,72] },
+                  { key: 'util', label: 'Utiliza\u00e7\u00e3o', color: '#3b82f6', data: [21,18,17.2,15,15.3,16,17,30,32,31,28,30] },
+                  { key: 'ocioso', label: 'Ocioso', color: '#f59e0b', data: [39,41,48.2,47,52.4,50,46,38,37,33,35,37] },
+                  { key: 'espera', label: 'Espera Operacional', color: '#a855f7', data: [7,8,7.2,6,6.1,6.5,6,6,7,7,6,7] },
+                  { key: 'manut', label: 'Manuten\u00e7\u00e3o', color: '#ef4444', data: [42,40,34.5,37,32.4,34,32,30,31,32,29,28] },
+                ];
+                var meta = 90;
+                var W = 480, H = 240, left = 34, right = 8, top = 8, bottom = 28;
+                var cW = W - left - right, cH = H - top - bottom;
+                function xPos(i) { return left + (i / (dates.length - 1)) * cW; }
+                function yPos(v) { return top + cH - (v / 100) * cH; }
+                var ticks = [0,25,50,75,100];
+
+                return (
+                  <div className="bg-white border border-stone-200/70 rounded-xl shadow-sm flex flex-col p-3 h-full min-h-0">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-1.5 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded flex items-center justify-center text-white text-[9px] font-bold" style={{ background: '#479C4A' }}>D</span>
+                        <span className="text-[11px] font-bold text-ink uppercase tracking-wide">Evolu&ccedil;&atilde;o da Disponibilidade</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex rounded-md overflow-hidden border border-stone-200">
+                          <span className="text-[9px] font-semibold text-white px-2.5 py-1 flex items-center gap-1" style={{ background: '#22c55e' }}>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            Semana
+                          </span>
+                          <span className="text-[9px] font-medium text-muted px-2.5 py-1 bg-white flex items-center gap-1">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            M&ecirc;s
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-semibold text-white px-2.5 py-1 rounded-md flex items-center gap-1" style={{ background: '#22c55e' }}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                          Detalhes
+                        </span>
+                      </div>
+                    </div>
+                    {/* SVG chart */}
+                    <div className="flex-1 min-h-0 relative">
+                      <svg viewBox={'0 0 ' + W + ' ' + H} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                        {/* Grid lines */}
                         {ticks.map(function(t) {
-                          var yy = top + chartH - (t / 100) * chartH;
-                          return React.createElement('g', { key: 'tick-' + t },
-                            React.createElement('line', { x1: left, x2: left + chartW, y1: yy, y2: yy, stroke: '#e7e5e4', strokeWidth: 0.5 }),
-                            React.createElement('text', { x: left - 4, y: yy + 3, fontSize: '7', fill: '#78716c', textAnchor: 'end' }, t + '%')
+                          var yy = yPos(t);
+                          return React.createElement('g', { key: 'g-' + t },
+                            React.createElement('line', { x1: left, x2: left + cW, y1: yy, y2: yy, stroke: '#e7e5e4', strokeWidth: 0.5 }),
+                            React.createElement('text', { x: left - 5, y: yy + 3, fontSize: '7', fill: '#78716c', textAnchor: 'end' }, t + '%')
                           );
                         })}
-                        {bars.map(function(b, i) {
-                          var x = left + i * (bw + gap);
-                          var greenH = (b.d / 100) * chartH;
-                          var redH = chartH - greenH;
-                          return React.createElement('g', { key: i },
-                            React.createElement('rect', { x: x, y: top, width: bw, height: redH, fill: '#C93D3D' }),
-                            React.createElement('rect', { x: x, y: top + redH, width: bw, height: greenH, fill: '#479C4A' }),
-                            React.createElement('text', { x: x + bw / 2, y: top + chartH + 11, textAnchor: 'middle', fontSize: '7', fill: '#78716c' }, b.label)
+                        {/* Meta dashed line */}
+                        <line x1={left} x2={left + cW} y1={yPos(meta)} y2={yPos(meta)} stroke="#57534e" strokeWidth="1" strokeDasharray="5 3" />
+                        <circle cx={left + cW + 1} cy={yPos(meta)} r="3" fill="#57534e" />
+                        {/* Series lines */}
+                        {series.map(function(s) {
+                          var pts = s.data.map(function(v, i) { return xPos(i) + ',' + yPos(v); }).join(' ');
+                          return React.createElement('g', { key: s.key },
+                            React.createElement('polyline', { points: pts, fill: 'none', stroke: s.color, strokeWidth: 1.8, strokeLinejoin: 'round', strokeLinecap: 'round' }),
+                            s.data.map(function(v, i) {
+                              return React.createElement('circle', { key: i, cx: xPos(i), cy: yPos(v), r: (fixedIdx === i) ? 4 : 2.5, fill: s.color, stroke: 'white', strokeWidth: 1 });
+                            })
                           );
                         })}
+                        {/* X labels */}
+                        {dates.map(function(d, i) {
+                          return React.createElement('text', { key: 'xl-' + i, x: xPos(i), y: H - 4, fontSize: '6.5', fill: '#78716c', textAnchor: 'middle', transform: 'rotate(-25,' + xPos(i) + ',' + (H - 4) + ')' }, d);
+                        })}
+                        {/* Fixed vertical line at selected date */}
+                        <line x1={xPos(fixedIdx)} x2={xPos(fixedIdx)} y1={top} y2={top + cH} stroke="#a8a29e" strokeWidth="0.8" strokeDasharray="3 2" />
                       </svg>
-                    );
-                  })()}
-                  <div className="flex items-center justify-center gap-4 mt-1 shrink-0">
-                    <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#479C4A' }}/>Disponibilidade</span>
-                    <span className="flex items-center gap-1 text-[9px] text-muted"><span className="w-2 h-2 rounded-sm" style={{ background: '#C93D3D' }}/>Indisponibilidade</span>
+                      {/* Fixed tooltip */}
+                      <div className="absolute bg-white border border-stone-200 rounded-lg shadow-lg px-3 py-2 pointer-events-none z-10" style={{ left: (xPos(fixedIdx) / W * 100) + '%', top: '8px' }}>
+                        <div className="text-xs font-bold text-ink mb-1">{dates[fixedIdx]}</div>
+                        {series.map(function(s) { return (
+                          <div key={s.key} className="flex items-center gap-1.5 text-[10px] leading-relaxed">
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: s.color }} />
+                            <span className="text-muted">{s.label}:</span>
+                            <span className="font-semibold" style={{ color: s.color }}>{s.data[fixedIdx].toFixed(1)}%</span>
+                          </div>
+                        ); })}
+                      </div>
+                    </div>
+                    {/* Legend */}
+                    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-1.5 shrink-0">
+                      <span className="flex items-center gap-1 text-[8px] text-muted"><span className="w-2 h-2 rounded-full" style={{ background: '#57534e' }}/>Meta</span>
+                      {series.map(function(s) { return (
+                        <span key={s.key} className="flex items-center gap-1 text-[8px] text-muted"><span className="w-2 h-2 rounded-full" style={{ background: s.color }}/>{s.label}</span>
+                      ); })}
+                    </div>
                   </div>
-                </div>
-                {/* Big numbers à direita */}
-                <div className="grid grid-cols-2 gap-1.5 flex-[2] content-center">
-                  <div className="border border-stone-200/70 rounded-lg p-2">
-                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Disponibilidade</div>
-                    <div className="text-base font-bold" style={{ color: '#479C4A' }}>72,2%</div>
-                    <div className="text-[7px] text-muted">Meta vs atual</div>
+                );
+              })()}
+
+              {/* ── GRÁFICO 2: Scatter plot — Disponibilidade por Unidade ── */}
+              {(function() {
+                var fixedPt = 4; // CTG — tooltip sempre visível
+                var units = [
+                  {n:'Matriz',v:5,d:100},{n:'Filial SP',v:8,d:98},{n:'Filial PR',v:12,d:93},{n:'Filial MG',v:15,d:91},
+                  {n:'CTG',v:23,d:65.4},{n:'Filial GO',v:3,d:88},{n:'Filial BA',v:7,d:85},{n:'Filial RS',v:10,d:78},
+                  {n:'Filial SC',v:6,d:82},{n:'Filial MT',v:18,d:75},{n:'Filial MS',v:4,d:60},{n:'Filial RJ',v:9,d:72},
+                  {n:'Filial PE',v:2,d:87},{n:'Filial CE',v:3,d:80},{n:'Filial PA',v:5,d:59},{n:'Filial AM',v:2,d:47},
+                  {n:'Filial TO',v:4,d:62},{n:'Filial MA',v:3,d:58},{n:'Filial PI',v:1,d:30},{n:'Filial RN',v:2,d:0},
+                  {n:'Filial AL',v:6,d:76},{n:'Filial SE',v:3,d:68},{n:'Filial ES',v:7,d:84},{n:'Filial DF',v:4,d:79},
+                  {n:'Filial AP',v:1,d:45},{n:'Filial RO',v:2,d:55},{n:'Filial AC',v:1,d:28},{n:'Regional N',v:14,d:77},
+                  {n:'Regional NE',v:11,d:64},{n:'Regional CO',v:20,d:70},{n:'Hub Log\u00edstico 1',v:30,d:80},
+                  {n:'Hub Log\u00edstico 2',v:25,d:66},{n:'Hub Log\u00edstico 3',v:28,d:63},{n:'Base Operacional',v:35,d:78},
+                  {n:'CD Sul',v:40,d:85},{n:'CD Sudeste',v:80,d:56},{n:'CD Norte',v:110,d:57},
+                  {n:'Unidade Teste',v:8,d:89},{n:'Filial Nova',v:5,d:86},{n:'Transp. Ext.',v:10,d:67},
+                  {n:'Sub Base A',v:3,d:61},{n:'Sub Base B',v:6,d:73},{n:'Sub Base C',v:4,d:46},
+                  {n:'Oficina Central',v:12,d:83},{n:'P\u00e1tio Externo',v:7,d:60},{n:'Garagem 2',v:9,d:71},
+                ];
+                var meta = 90;
+                var maxV = 123;
+                var W = 480, H = 240, left = 42, right = 20, top = 8, bottom = 28;
+                var cW = W - left - right, cH = H - top - bottom;
+                function xP(v) { return left + (v / maxV) * cW; }
+                function yP(d) { return top + cH - (d / 100) * cH; }
+                var yTicks = [0,25,50,75,100];
+                var xTicks = [0,35,70,123];
+                var fu = units[fixedPt];
+                var fuAbove = fu.d >= meta;
+
+                return (
+                  <div className="bg-white border border-stone-200/70 rounded-xl shadow-sm flex flex-col p-3 h-full min-h-0">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-1.5 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded flex items-center justify-center text-white text-[9px] font-bold" style={{ background: '#479C4A' }}>D</span>
+                        <span className="text-[11px] font-bold text-ink uppercase tracking-wide">Disponibilidade por Unidade</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[9px] font-medium text-muted border border-stone-200 rounded-md px-2 py-1 flex items-center gap-1">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                          Ver Tabela
+                        </span>
+                      </div>
+                    </div>
+                    {/* Dropdown mock */}
+                    <div className="flex justify-end mb-1 shrink-0">
+                      <span className="text-[9px] text-muted border border-stone-200 rounded-md px-2.5 py-1 flex items-center gap-1">
+                        % Disponibilidade
+                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                      </span>
+                    </div>
+                    {/* SVG chart */}
+                    <div className="flex-1 min-h-0 relative">
+                      <svg viewBox={'0 0 ' + W + ' ' + H} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                        {/* Y grid */}
+                        {yTicks.map(function(t) {
+                          var yy = yP(t);
+                          return React.createElement('g', { key: 'yg-' + t },
+                            React.createElement('line', { x1: left, x2: left + cW, y1: yy, y2: yy, stroke: '#e7e5e4', strokeWidth: 0.5 }),
+                            React.createElement('text', { x: left - 5, y: yy + 3, fontSize: '7', fill: '#78716c', textAnchor: 'end' }, t + '%')
+                          );
+                        })}
+                        {/* X grid */}
+                        {xTicks.map(function(t) {
+                          var xx = xP(t);
+                          return React.createElement('g', { key: 'xg-' + t },
+                            React.createElement('line', { x1: xx, x2: xx, y1: top, y2: top + cH, stroke: '#e7e5e4', strokeWidth: 0.5 }),
+                            React.createElement('text', { x: xx, y: H - 8, fontSize: '7', fill: '#78716c', textAnchor: 'middle' }, String(t))
+                          );
+                        })}
+                        {/* Meta dashed line */}
+                        <line x1={left} x2={left + cW} y1={yP(meta)} y2={yP(meta)} stroke="#57534e" strokeWidth="1" strokeDasharray="5 3" />
+                        <text x={left + cW + 5} y={yP(meta) + 3} fontSize="8" fill="#57534e" fontWeight="600">(M)</text>
+                        {/* 65% horizontal reference */}
+                        <line x1={left} x2={left + cW} y1={yP(65)} y2={yP(65)} stroke="#e7e5e4" strokeWidth="0.7" />
+                        {/* Dots */}
+                        {units.map(function(u, i) {
+                          var above = u.d >= meta;
+                          return React.createElement('circle', {
+                            key: i, cx: xP(u.v), cy: yP(u.d),
+                            r: (fixedPt === i) ? 5.5 : (3 + Math.min(u.v / 40, 2)),
+                            fill: above ? '#22c55e' : '#ef4444',
+                            fillOpacity: (fixedPt === i) ? 1 : 0.85,
+                            stroke: 'white', strokeWidth: 1,
+                          });
+                        })}
+                        {/* Axis labels */}
+                        <text x={left + cW / 2} y={H - 0} fontSize="8" fill="#78716c" textAnchor="middle">Quantidade de Ativos</text>
+                        <text x={8} y={top + cH / 2} fontSize="8" fill="#78716c" textAnchor="middle" transform={'rotate(-90,8,' + (top + cH / 2) + ')'}>% Disponibilidade</text>
+                      </svg>
+                      {/* Fixed tooltip on CTG */}
+                      <div className="absolute bg-white border border-stone-200 rounded-lg shadow-lg px-3 py-2.5 pointer-events-none z-10" style={{ left: (xP(fu.v) / W * 100 + 2) + '%', top: (yP(fu.d) / H * 100 - 5) + '%' }}>
+                        <div className="text-xs font-bold text-ink mb-1">{fu.n}</div>
+                        <div className="text-[10px] text-muted">Ve&iacute;culos: <span className="font-semibold text-ink">{fu.v}</span></div>
+                        <div className="text-[10px] text-muted">% Disponibilidade: <span className="font-semibold text-ink">{fu.d.toFixed(1)}%</span></div>
+                        <div className="text-[10px]">Status: <span className="font-semibold" style={{ color: fuAbove ? '#22c55e' : '#ef4444' }}>{fuAbove ? 'Acima da meta' : 'Abaixo da meta'}</span></div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="border border-stone-200/70 rounded-lg p-2">
-                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Indisponibilidade</div>
-                    <div className="text-base font-bold text-red-500">27,8%</div>
-                    <div className="text-[7px] text-muted">Tempo em manuten&ccedil;&atilde;o</div>
-                  </div>
-                  <div className="border border-stone-200/70 rounded-lg p-2">
-                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Utiliza&ccedil;&atilde;o</div>
-                    <div className="text-base font-bold text-ink">33,0%</div>
-                    <div className="text-[7px] text-muted">Tempo em viagem</div>
-                  </div>
-                  <div className="border border-stone-200/70 rounded-lg p-2">
-                    <div className="text-[7px] font-bold uppercase tracking-wider text-muted mb-0.5">% Ocioso</div>
-                    <div className="text-base font-bold text-red-500">39,1%</div>
-                    <div className="text-[7px] text-muted">Tempo dispon&iacute;vel</div>
-                  </div>
-                </div>
-              </div>
+                );
+              })()}
+
             </div>
           </SlideReveal>
 
@@ -515,7 +671,7 @@ function DeckSolucao({ active }) {
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-[8px] font-bold text-white bg-green-600 rounded px-1">#1</span>
-                      <span className="text-[10px] font-bold text-ink ml-1">BORA</span>
+                      <span className="text-[10px] font-bold text-ink ml-1">RODOPE&Ccedil;AS</span>
                     </div>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#479C4A" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg>
                   </div>
@@ -548,7 +704,7 @@ function DeckSolucao({ active }) {
               {/* Bar chart — 7 fornecedores */}
               <div className="flex flex-col justify-center gap-[3px]">
                 {[
-                  { name: 'BORA', value: 1200, color: '#479C4A' },
+                  { name: 'RODOPE&Ccedil;AS', value: 1200, color: '#479C4A' },
                   { name: 'PABU', value: 204, color: '#3d863f' },
                   { name: 'PORTOEIXO', value: 151, color: '#3b82f6' },
                   { name: 'PERIMPECAS', value: 90, color: '#a8a29e' },
@@ -599,36 +755,57 @@ function DeckSolucao({ active }) {
 function DeckAgentesVision({ active }) {
   return (
     <div className="flex-1 flex flex-col" style={{ background: '#1c1917' }}>
-      <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 py-8">
-        <div className="max-w-5xl w-full mx-auto">
+      <div className="flex-1 flex justify-center items-stretch min-h-0">
+        <div className="flex-1 grid grid-cols-[40%_1fr] min-h-0" style={{ maxWidth: '1200px' }}>
+
+        {/* ── Coluna esquerda: narrativa ── */}
+        <div className="flex flex-col justify-center pr-10 py-8">
           <SlideReveal active={active} delay={0}>
-            <div className="text-center mb-8">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-500 mb-4">Time Rabbot</div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-[1.08] text-white mb-3">
-                Um time de IA que trabalha<br /><span className="text-brand-500">24 horas por dia, 7 dias por semana</span>
-              </h2>
+            <div className="flex items-center gap-2 mb-6">
+              <span className="w-6 h-px bg-brand-500" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-500">Time Rabbot</span>
             </div>
           </SlideReveal>
+
+          <SlideReveal active={active} delay={100}>
+            <h2 className="font-bold tracking-tight leading-[1.05] mb-6" style={{ fontSize: 'clamp(28px, 3.2vw, 44px)', letterSpacing: '-0.03em' }}>
+              <span style={{ color: '#d1d5db' }}>Sua opera&ccedil;&atilde;o inteira,</span><br />
+              <span className="text-brand-500">rodando sozinha.</span>
+            </h2>
+          </SlideReveal>
+
           <SlideReveal active={active} delay={200}>
-            <div className="flex justify-center">
-              <AgentTeamOrganogram showcase />
+            <p className="text-sm text-stone-400 leading-relaxed mb-8" style={{ maxWidth: 380 }}>
+              Um <strong className="text-white">time de agentes de IA</strong> cobrindo as <strong className="text-white">6 jornadas</strong> da sua frota, 24/7.
+            </p>
+          </SlideReveal>
+
+          <SlideReveal active={active} delay={300}>
+            <div className="flex items-start gap-3 mb-6 rounded-lg px-4 py-3" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse shrink-0 mt-1" />
+              <span className="text-sm text-stone-300 leading-relaxed">
+                J&aacute; rodamos o agente <strong className="text-white">Marco</strong> na sua opera&ccedil;&atilde;o.<br />
+                <span className="text-brand-500 font-medium">Imagine o time completo.</span>
+              </span>
             </div>
           </SlideReveal>
+
           <SlideReveal active={active} delay={400}>
-            <div className="flex flex-col items-center gap-3 mt-6">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse shrink-0" />
-                <span className="text-sm text-stone-400">
-                  J&aacute; rodamos o agente Marco na sua opera&ccedil;&atilde;o. Imagine o time completo.
-                </span>
-              </div>
-              <a href="https://rodojacto-agent-report.lovable.app" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition shadow-lg shadow-brand-600/25">
-                Ver relat&oacute;rio do Marco
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              </a>
-            </div>
+            <a href="https://rodojacto-agent-report.lovable.app" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition shadow-lg shadow-brand-600/25">
+              Ver relat&oacute;rio do Marco
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
           </SlideReveal>
+        </div>
+
+        {/* ── Coluna direita: grid de agentes ── */}
+        <div className="flex items-center justify-center pl-6 py-8">
+          <SlideReveal active={active} delay={200}>
+            <AgentTeamOrganogram showcase />
+          </SlideReveal>
+        </div>
+
         </div>
       </div>
     </div>
@@ -654,7 +831,7 @@ function DeckPiloto({ active }) {
     <div className="flex-1 flex flex-col overflow-y-auto bg-bg">
       <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-4">
         <div className="max-w-[1100px] w-full mx-auto">
-          <SlideEyebrow active={active} delay={0}>Piloto &middot; Blitz 22/04</SlideEyebrow>
+          <SlideEyebrow active={active} delay={0}>Piloto &middot; Blitz 22/04 &rarr; Hoje</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
               Fomos at&eacute; voc&ecirc;s e provamos em 1 dia.
@@ -662,66 +839,147 @@ function DeckPiloto({ active }) {
             <p className="text-xs text-muted mb-5">Ao contr&aacute;rio de solu&ccedil;&otilde;es que prometem, a Rabbot implanta e prova resultado no mesmo dia.</p>
           </SlideReveal>
 
-          {/* Main content: antes/depois */}
-          <div>
-            {/* Antes x Depois */}
-            <SlideReveal active={active} delay={200}>
-              {/* Prints inline — Hoje vs Com a Rabbot */}
-              <div className="grid grid-cols-2 gap-x-8 mb-4">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-red-500 mb-1.5 block">Hoje</span>
-                  <div className="rounded-lg overflow-hidden border border-stone-200/70">
-                    <img src="assets/planilha.jpeg" alt="Planilha manual" className="w-full object-contain" />
-                  </div>
+          {/* Main content: duas colunas — visuais à esquerda, texto à direita */}
+          <SlideReveal active={active} delay={200}>
+            <div className="flex gap-0">
+
+              {/* ── COLUNA ESQUERDA: Hoje (imagem) + seta + Com a Rabbot (terminal) ── */}
+              <div className="flex flex-col pr-8" style={{ flex: '0 0 42%' }}>
+                {/* Hoje */}
+                <span className="text-[10px] font-mono uppercase tracking-wider text-red-500 mb-1.5 block">Hoje <span className="normal-case tracking-normal text-muted font-sans">(Planilha manual)</span></span>
+                <div className="rounded-lg overflow-hidden border border-stone-200/70">
+                  <img src="assets/planilha.jpeg" alt="Planilha manual" className="w-full object-contain" />
                 </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-700 mb-1.5 block">Com a Rabbot</span>
-                  <div className="rounded-lg overflow-hidden border border-brand-200">
-                    <img src="assets/kanbanrabbot.png" alt="Kanban Rabbot" className="w-full object-contain" />
-                  </div>
+
+                {/* Seta */}
+                <div className="flex flex-col items-center my-2.5">
+                  <svg width="20" height="24" viewBox="0 0 20 24" fill="none"><path d="M10 2 L10 18 M4 14 L10 22 L16 14" stroke="#479C4A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+
+                {/* Com a Rabbot — Terminal */}
+                <span className="text-[10px] font-mono uppercase tracking-wider text-brand-700 mb-1.5 block">Com a Rabbot <span className="normal-case tracking-normal text-muted font-sans">(Processos automatizados)</span></span>
+                {(function() {
+                  var _tick = React.useState(0), tick = _tick[0], setTick = _tick[1];
+                  var logLines = [
+                    { time: '09:14', action: 'Detectou parada n\u00e3o programada', detail: 'Caminh\u00e3o #4521' },
+                    { time: '09:14', action: '\u2192 acionou time de manuten\u00e7\u00e3o', detail: '' },
+                    { time: '09:15', action: 'Checou preventivas vencidas', detail: 'revis\u00e3o 30k km vencida' },
+                    { time: '09:15', action: 'Abriu O.S. interna', detail: 'prioridade alta' },
+                    { time: '09:16', action: 'Checou estoque', detail: 'pastilhas em ruptura \u2192 acionou compras' },
+                    { time: '09:18', action: 'Cotou 3 fornecedores', detail: 'melhor pre\u00e7o selecionado' },
+                    { time: '09:18', action: 'Auto-aprovou or\u00e7amento', detail: 'entrega em 2h' },
+                    { time: '11:30', action: 'Conciliou NF da entrega', detail: 'R$ 1.247 \u00b7 tudo conforme' },
+                    { time: '13:42', action: 'Auditou execu\u00e7\u00e3o', detail: 'checklist de sa\u00edda OK' },
+                    { time: '13:45', action: null, detail: null },
+                  ];
+                  var total = logLines.length;
+
+                  React.useEffect(function() {
+                    if (!active) { setTick(0); return; }
+                    setTick(0);
+                    var count = 0;
+                    var delay = setTimeout(function() {
+                      var iv = setInterval(function() {
+                        count++;
+                        setTick(count);
+                        if (count >= total) clearInterval(iv);
+                      }, 450);
+                    }, 600);
+                    return function() { clearTimeout(delay); };
+                  }, [active]);
+
+                  return (
+                    <div className="rounded-lg overflow-hidden flex-1 flex flex-col" style={{ background: '#0f172a' }}>
+                      <div className="flex items-center gap-2 px-3 py-1.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-[8px] font-bold uppercase tracking-[0.15em]" style={{ color: '#22c55e' }}>Automa&ccedil;&otilde;es em Execu&ccedil;&atilde;o</span>
+                      </div>
+                      <div className="px-3 py-2 flex-1 flex flex-col justify-start" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', minHeight: (total * 17) + 'px' }}>
+                        {logLines.map(function(line, i) {
+                          if (i >= tick) return null;
+                          var isLast = (line.action === null);
+                          var isNewest = (i === tick - 1);
+                          var allDone = (tick >= total && isLast);
+                          return (
+                            <div key={i} className="flex items-baseline text-[8px] leading-[16px] px-1 py-px rounded"
+                              style={{
+                                animation: isNewest ? 'termSlideIn 0.35s ease-out' : 'none',
+                                background: allDone ? 'rgba(34,197,94,0.06)' : 'transparent',
+                              }}>
+                              <span style={{ color: '#64748b', minWidth: '28px', flexShrink: 0 }}>{line.time}</span>
+                              <span style={{ color: '#334155', margin: '0 2px' }}>&middot;</span>
+                              <span style={{ flexShrink: 0 }}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: '-2px' }}><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.5" fill="#22c55e"/><circle cx="15" cy="10" r="1.5" fill="#22c55e"/><path d="M9 15c0 0 1.5 2 3 2s3-2 3-2"/></svg></span>
+                              <span style={{ color: '#334155', margin: '0 2px' }}>&middot;</span>
+                              {isLast ? (
+                                <span style={{ color: '#22c55e', fontWeight: 700 }}>&check; Ve&iacute;culo liberado &middot; dispon&iacute;vel para rota</span>
+                              ) : (
+                                <span>
+                                  <span style={{ color: '#e2e8f0' }}>{line.action}</span>
+                                  {line.detail && (
+                                    <span>
+                                      <span style={{ color: '#334155', margin: '0 2px' }}>&middot;</span>
+                                      <span style={{ color: '#f8fafc', fontWeight: 600 }}>{line.detail}</span>
+                                    </span>
+                                  )}
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <style>{'\
+                        @keyframes termSlideIn {\
+                          from { opacity: 0; transform: translateY(5px); }\
+                          to { opacity: 1; transform: translateY(0); }\
+                        }\
+                      '}</style>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* ── Divider vertical ── */}
+              <div className="w-px bg-stone-200/70 flex-shrink-0" />
+
+              {/* ── COLUNA DIREITA: Antes / Depois (texto) ── */}
+              <div className="flex flex-col justify-center pl-8 flex-1 min-w-0">
+                {/* Headers */}
+                <div className="grid grid-cols-2 gap-x-6 mb-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-red-500">Antes</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-brand-700">Depois</span>
+                </div>
+
+                {/* Pares */}
+                <div className="space-y-0">
+                  {pairs.map(function(p, i) { return (
+                    <div key={i} className="grid grid-cols-2 gap-x-6 py-3 border-b border-stone-200/70 last:border-b-0">
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <IconAlert size={10} strokeWidth={1.5} className="text-stone-400" />
+                        </div>
+                        <div>
+                          <div className="text-[13px] font-semibold text-ink leading-tight">{p.before.title}</div>
+                          <div className="text-[11px] text-muted leading-snug mt-0.5">{p.before.desc}</div>
+                          <div className="text-[10px] text-red-500 font-medium mt-0.5">{p.before.tag}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-brand-50 flex items-center justify-center shrink-0 mt-0.5">
+                          <IconCheck size={10} strokeWidth={1.5} className="text-brand-600" />
+                        </div>
+                        <div>
+                          <div className="text-[13px] font-semibold text-ink leading-tight">{p.after.title}</div>
+                          <div className="text-[11px] text-muted leading-snug mt-0.5">{p.after.desc}</div>
+                          <div className="text-[10px] text-brand-600 font-medium mt-0.5">{p.after.tag}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ); })}
                 </div>
               </div>
 
-              {/* Mensagem */}
-              <div className="rounded-lg p-3 mb-4" style={{ background: 'linear-gradient(135deg, #eef6ee 0%, #f5f5f4 100%)', border: '1px solid #d4e8d5' }}>
-                <p className="text-[12px] text-muted text-center">
-                  Mais visibilidade para sua equipe. Menos manual, mais automatizado. Todas as vis&otilde;es conectadas num &uacute;nico lugar.
-                </p>
-              </div>
-
-              {/* Pares antes/depois */}
-              <div className="grid grid-cols-2 gap-x-8 mb-1.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-red-500">Antes</span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-brand-700">Depois</span>
-              </div>
-              <div className="space-y-0">
-                {pairs.map(function(p, i) { return (
-                  <div key={i} className="grid grid-cols-2 gap-x-8 py-3.5 border-b border-stone-200/70 last:border-b-0">
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <IconAlert size={10} strokeWidth={1.5} className="text-stone-400" />
-                      </div>
-                      <div>
-                        <div className="text-[13px] font-semibold text-ink leading-tight">{p.before.title}</div>
-                        <div className="text-[11px] text-muted leading-snug mt-0.5">{p.before.desc}</div>
-                        <div className="text-[10px] text-red-500 font-medium mt-0.5">{p.before.tag}</div>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-brand-50 flex items-center justify-center shrink-0 mt-0.5">
-                        <IconCheck size={10} strokeWidth={1.5} className="text-brand-600" />
-                      </div>
-                      <div>
-                        <div className="text-[13px] font-semibold text-ink leading-tight">{p.after.title}</div>
-                        <div className="text-[11px] text-muted leading-snug mt-0.5">{p.after.desc}</div>
-                        <div className="text-[10px] text-brand-600 font-medium mt-0.5">{p.after.tag}</div>
-                      </div>
-                    </div>
-                  </div>
-                ); })}
-              </div>
-            </SlideReveal>
-          </div>
+            </div>
+          </SlideReveal>
 
 
         </div>
@@ -791,68 +1049,81 @@ function DeckROI({ active }) {
 
 // ── SLIDE 8: CRONOGRAMA ──
 function DeckCrono({ active }) {
-  var cols = ['SEM 1', 'SEM 2', 'SEM 3', 'SEM 4'];
-  // rows: { label, sub, isGroup, color, start (0-based col), span (num cols), indent }
+  var totalCols = 12; // 3 meses x 4 semanas
+  // rows: { label, sub, isGroup, color, start (0-based col out of 12), span, indent }
   var rows = [
-    { label: '[a definir]', sub: '[a definir]', isGroup: true, color: '#479C4A', start: 0, span: 4 },
-    { label: '[a definir]', indent: true, color: '#479C4A', start: 0, span: 2 },
-    { label: '[a definir]', indent: true, color: '#479C4A', start: 1, span: 2 },
-    { label: '[a definir]', indent: true, color: '#479C4A', start: 0, span: 4 },
-    { label: '[a definir]', sub: '[a definir]', isGroup: true, color: '#d97706', start: 1, span: 3 },
-    { label: '[a definir]', indent: true, color: '#d97706', start: 1, span: 2 },
-    { label: '[a definir]', indent: true, color: '#d97706', start: 2, span: 2 },
-    { label: '[a definir]', sub: '[a definir]', isGroup: true, color: '#78716c', start: 1, span: 3 },
-    { label: '[a definir]', indent: true, color: '#78716c', start: 1, span: 2 },
-    { label: '[a definir]', indent: true, color: '#78716c', start: 2, span: 2 },
-  ];
-  var summaries = [
-    { period: '[A DEFINIR]', title: '[a definir]', desc: '[a definir]' },
-    { period: '[A DEFINIR]', title: '[a definir]', desc: '[a definir]' },
-    { period: '[A DEFINIR]', title: '[a definir]', desc: '[a definir]' },
+    // Fase 1 — Disponibilidade
+    { label: 'Fase 1 \u2014 Disponibilidade', isGroup: true, color: '#479C4A' },
+    { label: 'Kick-off + setup', indent: true, color: '#479C4A', start: 0, span: 1 },
+    { label: 'Treinamento', indent: true, color: '#479C4A', start: 1, span: 1 },
+    { label: 'Uso em opera\u00e7\u00e3o', indent: true, color: '#479C4A', start: 1, span: 4 },
+    { label: 'Primeiros resultados (Dashboard)', indent: true, color: '#479C4A', start: 5, span: 1 },
+    // Fase 2 — Manutenção
+    { label: 'Fase 2 \u2014 Manuten\u00e7\u00e3o Interna (Corretiva + Preventiva)', isGroup: true, color: '#3b82f6' },
+    { label: 'Setup e treinamento', indent: true, color: '#3b82f6', start: 0, span: 3 },
+    { label: 'Uso em opera\u00e7\u00e3o', indent: true, color: '#3b82f6', start: 2, span: 3 },
+    { label: 'Primeiros resultados (Dashboard)', indent: true, color: '#3b82f6', start: 5, span: 1 },
+    // Fase 3 — Aquisição
+    { label: 'Fase 3 \u2014 Aquisi\u00e7\u00e3o de Pe\u00e7as', isGroup: true, color: '#84cc16' },
+    { label: 'Mapeamento', indent: true, color: '#84cc16', start: 3, span: 1 },
+    { label: 'Kick-off + setup', indent: true, color: '#84cc16', start: 6, span: 1 },
+    { label: 'Treinamento', indent: true, color: '#84cc16', start: 6, span: 2 },
+    { label: 'Uso em opera\u00e7\u00e3o', indent: true, color: '#84cc16', start: 7, span: 4 },
+    { label: 'Primeiros resultados (Dashboard)', indent: true, color: '#84cc16', start: 11, span: 1 },
   ];
   return (
     <div className="flex-1 flex flex-col bg-bg">
       <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-6">
-        <div className="max-w-[1100px] w-full mx-auto">
+        <div className="max-w-[1200px] w-full mx-auto">
           <SlideEyebrow active={active} delay={0}>Cronograma de implanta&ccedil;&atilde;o</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Em 30 dias, sua opera&ccedil;&atilde;o rodando com a Rabbot.
+              Em 90 dias, sua opera&ccedil;&atilde;o inteira rodando com a Rabbot.
             </h2>
-            <p className="text-xs text-muted mb-5">Disponibilidade no m&ecirc;s 1. Manuten&ccedil;&atilde;o e integra&ccedil;&atilde;o ERP em paralelo.</p>
           </SlideReveal>
 
           {/* Gantt table */}
           <SlideReveal active={active} delay={250}>
             <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-4">
-              {/* Header */}
-              <div className="grid grid-cols-[240px_1fr] border-b border-stone-200/70 bg-stone-50">
-                <div className="px-4 py-2 text-[9px] font-semibold uppercase tracking-wider text-muted">Projeto / Atividade</div>
-                <div className="grid grid-cols-4">
-                  {cols.map(function(c, i) { return (
-                    <div key={i} className="px-2 py-2 text-[9px] font-semibold uppercase tracking-wider text-muted text-center border-l border-stone-200/70">{c}</div>
+              {/* Header — Meses */}
+              <div className="grid grid-cols-[200px_1fr] border-b border-stone-200/70 bg-stone-50">
+                <div />
+                <div className="grid grid-cols-3">
+                  {['M\u00caS 1', 'M\u00caS 2', 'M\u00caS 3'].map(function(m, i) { return (
+                    <div key={i} className={'px-2 py-1.5 text-[9px] font-bold uppercase tracking-wider text-ink text-center' + (i > 0 ? ' border-l border-stone-200/70' : '')}>{m}</div>
+                  ); })}
+                </div>
+              </div>
+              {/* Header — Semanas */}
+              <div className="grid grid-cols-[200px_1fr] border-b border-stone-200/70 bg-stone-50/50">
+                <div className="px-4 py-1 text-[8px] font-semibold uppercase tracking-wider text-muted">Projeto / Atividade</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)' }}>
+                  {[1,2,3,4,1,2,3,4,1,2,3,4].map(function(s, i) { return (
+                    <div key={i} className={'py-1 text-[8px] text-muted text-center' + (i % 4 === 0 ? ' border-l border-stone-200/70' : ' border-l border-stone-100/50')}>S{s}</div>
                   ); })}
                 </div>
               </div>
               {/* Rows */}
               {rows.map(function(r, i) { return (
-                <div key={i} className={'grid grid-cols-[240px_1fr] border-b last:border-b-0 border-stone-100 ' + (r.isGroup ? 'bg-stone-50/50' : '')}>
-                  <div className={'px-4 py-2 flex flex-col justify-center ' + (r.indent ? 'pl-8' : '')}>
-                    <div className={'leading-tight ' + (r.isGroup ? 'text-xs font-bold text-ink' : 'text-[11px] text-stone-600')}>
+                <div key={i} className={'grid grid-cols-[200px_1fr] border-b last:border-b-0 border-stone-100 ' + (r.isGroup ? 'bg-stone-50/50' : '')}>
+                  <div className={'px-4 py-1.5 flex flex-col justify-center ' + (r.indent ? 'pl-7' : '')}>
+                    <div className={'leading-tight ' + (r.isGroup ? 'text-[11px] font-bold' : 'text-[10px] text-stone-600')} style={r.isGroup ? { color: r.color } : {}}>
                       {r.indent && <span className="text-stone-300 mr-1">&bull;</span>}
                       {r.label}
                     </div>
-                    {r.sub && <div className="text-[9px] text-brand-600 font-medium">{r.sub}</div>}
+                    {r.sub && <div className="text-[8px] font-medium" style={{ color: r.color }}>{r.sub}</div>}
                   </div>
-                  <div className="relative" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
-                    {[0,1,2,3].map(function(ci) { return (
-                      <div key={ci} className="border-l border-stone-100" style={{ height: '100%' }} />
+                  <div className="relative" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)' }}>
+                    {[0,1,2,3,4,5,6,7,8,9,10,11].map(function(ci) { return (
+                      <div key={ci} style={{ height: '100%' }} className={ci % 4 === 0 ? 'border-l border-stone-200/70' : 'border-l border-stone-100/50'} />
                     ); })}
-                    <div className="absolute inset-0 flex items-center px-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
-                      <div style={{ gridColumn: (r.start + 1) + ' / ' + (r.start + r.span + 1), padding: '0 4px' }}>
-                        <div className="h-2.5 rounded-full" style={{ background: r.color }} />
+                    {r.start !== undefined && (
+                      <div className="absolute inset-0 flex items-center" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)' }}>
+                        <div style={{ gridColumn: (r.start + 1) + ' / ' + (r.start + r.span + 1), padding: '0 3px' }}>
+                          <div className="h-2 rounded-full" style={{ background: r.color }} />
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               ); })}
@@ -861,11 +1132,11 @@ function DeckCrono({ active }) {
 
           {/* Legend */}
           <SlideReveal active={active} delay={400}>
-            <div className="flex items-center gap-4 mb-4 text-[10px] text-muted">
+            <div className="flex items-center gap-5 mb-4 text-[10px] text-muted">
               {[
-                { color: '#479C4A', label: 'Disponibilidade' },
-                { color: '#d97706', label: 'Manuten\u00e7\u00e3o' },
-                { color: '#78716c', label: 'Integra\u00e7\u00e3o ERP' },
+                { color: '#479C4A', label: 'D \u00b7 Disponibilidade' },
+                { color: '#3b82f6', label: 'M \u00b7 Manuten\u00e7\u00e3o' },
+                { color: '#84cc16', label: 'A \u00b7 Aquisi\u00e7\u00e3o' },
               ].map(function(l, i) { return (
                 <div key={i} className="flex items-center gap-1.5">
                   <span className="w-3 h-2 rounded-full" style={{ background: l.color }} />
@@ -875,18 +1146,6 @@ function DeckCrono({ active }) {
             </div>
           </SlideReveal>
 
-          {/* Summary cards */}
-          <SlideReveal active={active} delay={500}>
-            <div className="grid grid-cols-3 gap-3">
-              {summaries.map(function(s, i) { return (
-                <div key={i} className="bg-white border border-stone-200/70 rounded-xl p-4">
-                  <div className={'text-[9px] font-bold uppercase tracking-wider mb-1 ' + ['text-brand-700', 'text-amber-600', 'text-stone-500'][i]}>{s.period}</div>
-                  <div className="text-sm font-semibold text-ink mb-1">{s.title}</div>
-                  <div className="text-[11px] text-muted leading-snug">{s.desc}</div>
-                </div>
-              ); })}
-            </div>
-          </SlideReveal>
         </div>
       </div>
     </div>
