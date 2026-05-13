@@ -829,14 +829,13 @@ function DeckPiloto({ active }) {
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto bg-bg">
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-4">
-        <div className="max-w-[1100px] w-full mx-auto">
-          <SlideEyebrow active={active} delay={0}>Piloto &middot; Blitz 22/04 &rarr; Hoje</SlideEyebrow>
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-4" style={{ fontSize: 'clamp(14px, 1.1vw, 18px)' }}>
+        <div className="max-w-[1400px] w-full mx-auto">
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
               Fomos at&eacute; voc&ecirc;s e provamos em 1 dia.
             </h2>
-            <p className="text-xs text-muted mb-5">Ao contr&aacute;rio de solu&ccedil;&otilde;es que prometem, a Rabbot implanta e prova resultado no mesmo dia.</p>
+            <p className="text-sm text-muted mb-4">Ao contr&aacute;rio de solu&ccedil;&otilde;es que prometem, a Rabbot implanta e prova resultado no mesmo dia.</p>
           </SlideReveal>
 
           {/* Main content: duas colunas — visuais à esquerda, texto à direita */}
@@ -890,18 +889,18 @@ function DeckPiloto({ active }) {
 
                   return (
                     <div className="rounded-lg overflow-hidden flex-1 flex flex-col" style={{ background: '#0f172a' }}>
-                      <div className="flex items-center gap-2 px-3 py-1.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-[8px] font-bold uppercase tracking-[0.15em]" style={{ color: '#22c55e' }}>Automa&ccedil;&otilde;es em Execu&ccedil;&atilde;o</span>
+                      <div className="flex items-center gap-2 px-4 py-2" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: '#22c55e' }}>Automa&ccedil;&otilde;es em Execu&ccedil;&atilde;o</span>
                       </div>
-                      <div className="px-3 py-2 flex-1 flex flex-col justify-start" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', minHeight: (total * 17) + 'px' }}>
+                      <div className="px-3 py-2.5 flex-1 flex flex-col justify-start" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', minHeight: (total * 20) + 'px' }}>
                         {logLines.map(function(line, i) {
                           if (i >= tick) return null;
                           var isLast = (line.action === null);
                           var isNewest = (i === tick - 1);
                           var allDone = (tick >= total && isLast);
                           return (
-                            <div key={i} className="flex items-baseline text-[8px] leading-[16px] px-1 py-px rounded"
+                            <div key={i} className="flex items-baseline text-[10px] leading-[19px] px-1 py-0.5 rounded"
                               style={{
                                 animation: isNewest ? 'termSlideIn 0.35s ease-out' : 'none',
                                 background: allDone ? 'rgba(34,197,94,0.06)' : 'transparent',
@@ -952,15 +951,15 @@ function DeckPiloto({ active }) {
                 {/* Pares */}
                 <div className="space-y-0">
                   {pairs.map(function(p, i) { return (
-                    <div key={i} className="grid grid-cols-2 gap-x-6 py-3 border-b border-stone-200/70 last:border-b-0">
+                    <div key={i} className="grid grid-cols-2 gap-x-6 py-3.5 border-b border-stone-200/70 last:border-b-0">
                       <div className="flex items-start gap-2.5">
                         <div className="w-5 h-5 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-0.5">
                           <IconAlert size={10} strokeWidth={1.5} className="text-stone-400" />
                         </div>
                         <div>
-                          <div className="text-[13px] font-semibold text-ink leading-tight">{p.before.title}</div>
-                          <div className="text-[11px] text-muted leading-snug mt-0.5">{p.before.desc}</div>
-                          <div className="text-[10px] text-red-500 font-medium mt-0.5">{p.before.tag}</div>
+                          <div className="text-sm font-semibold text-ink leading-tight">{p.before.title}</div>
+                          <div className="text-xs text-muted leading-snug mt-0.5">{p.before.desc}</div>
+                          <div className="text-[11px] text-red-500 font-medium mt-1">{p.before.tag}</div>
                         </div>
                       </div>
                       <div className="flex items-start gap-2.5">
@@ -968,9 +967,9 @@ function DeckPiloto({ active }) {
                           <IconCheck size={10} strokeWidth={1.5} className="text-brand-600" />
                         </div>
                         <div>
-                          <div className="text-[13px] font-semibold text-ink leading-tight">{p.after.title}</div>
-                          <div className="text-[11px] text-muted leading-snug mt-0.5">{p.after.desc}</div>
-                          <div className="text-[10px] text-brand-600 font-medium mt-0.5">{p.after.tag}</div>
+                          <div className="text-sm font-semibold text-ink leading-tight">{p.after.title}</div>
+                          <div className="text-xs text-muted leading-snug mt-0.5">{p.after.desc}</div>
+                          <div className="text-[11px] text-brand-600 font-medium mt-1">{p.after.tag}</div>
                         </div>
                       </div>
                     </div>
