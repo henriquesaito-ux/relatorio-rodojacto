@@ -991,9 +991,20 @@ function DeckPiloto({ active }) {
 // ── SLIDE 7: ROI ──
 function DeckROI({ active }) {
   var levers = [
-    { letter: 'D', label: 'Disponibilidade', color: '#479C4A', value: '[a definir]', sub: '/m\u00eas', premises: ['[premissa 1]', '[premissa 2]'] },
-    { letter: 'M', label: 'Manuten\u00e7\u00e3o', color: '#d97706', value: '[a definir]', sub: '/m\u00eas', premises: ['[premissa 1]', '[premissa 2]'] },
-    { letter: 'A', label: 'Aquisi\u00e7\u00e3o', color: '#3b82f6', value: '[a definir]', sub: '/m\u00eas', premises: ['[premissa 1]', '[premissa 2]'] },
+    { letter: 'D', label: 'Disponibilidade', color: '#479C4A', value: '74.000', sub: '/m\u00eas', premises: [
+      'Carretas indispon\u00edveis/ociosas na opera\u00e7\u00e3o sem visibilidade',
+      'Carretas carregadas usadas como armazenagem \u2014 8 carretas \u00d7 R$ 4.040 = R$ 32k/m\u00eas',
+      '100 dias parados com movimenta\u00e7\u00e3o sem vis\u00e3o; sem controle de n\u00edvel de carregamento (total/parcial)',
+    ] },
+    { letter: 'M', label: 'Manuten\u00e7\u00e3o', color: '#d97706', value: 'a definir', sub: '/m\u00eas', premises: [
+      'Mix atual: 60% corretiva / 40% preventiva',
+      'Objetivo: inverter o ponteiro \u2014 reduzir corretiva, aumentar preventiva',
+      'Menos paradas n\u00e3o programadas = mais disponibilidade',
+    ] },
+    { letter: 'A', label: 'Aquisi\u00e7\u00e3o', color: '#3b82f6', value: 'a definir', sub: '/m\u00eas', premises: [
+      'Redu\u00e7\u00e3o de 6% a 10% em custo de pe\u00e7as',
+      'Cota\u00e7\u00e3o automatizada com ranking por efici\u00eancia',
+    ] },
   ];
   return (
     <div className="flex-1 flex flex-col bg-white">
@@ -1030,14 +1041,29 @@ function DeckROI({ active }) {
             </div>
           </SlideReveal>
           <SlideReveal active={active} delay={450}>
-            <div className="rounded-xl p-5 text-center" style={{ background: '#1c1917' }}>
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Total endere&ccedil;&aacute;vel</div>
-              <div className="flex items-baseline justify-center gap-3 flex-wrap">
-                <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ [placeholder]</span>
-                <span className="text-lg text-stone-500">/m&ecirc;s</span>
+            <div className="rounded-xl p-5" style={{ background: '#1c1917' }}>
+              <div className="flex items-stretch gap-6">
+                {/* Coluna esquerda — Total */}
+                <div className="text-center flex-1">
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Oportunidade total identificada</div>
+                  <div className="flex items-baseline justify-center gap-2">
+                    <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ 885k</span>
+                    <span className="text-lg text-stone-500">/ano</span>
+                  </div>
+                  <div className="mt-1.5 text-sm text-stone-500">R$ 74k /m&ecirc;s</div>
+                </div>
+                {/* Divider */}
+                <div className="w-px bg-white/10 flex-shrink-0" />
+                {/* Coluna direita — Recuperação Rabbot */}
+                <div className="text-center flex-1">
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Recupera&ccedil;&atilde;o com Rabbot (35% conservador)</div>
+                  <div className="flex items-baseline justify-center gap-2">
+                    <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ 310k</span>
+                    <span className="text-lg text-stone-500">/ano</span>
+                  </div>
+                  <div className="mt-1.5 text-sm text-stone-500">R$ 26k /m&ecirc;s &mdash; s&oacute; com visibilidade e alertas</div>
+                </div>
               </div>
-              <div className="mt-1.5 text-sm text-stone-500">R$ [placeholder] /ano</div>
-              <div className="mt-3 pt-3 border-t border-white/10 text-xs text-stone-600">N&uacute;meros ser&atilde;o preenchidos pela squad com premissas validadas</div>
             </div>
           </SlideReveal>
         </div>
