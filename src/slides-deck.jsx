@@ -1177,6 +1177,100 @@ function DeckCrono({ active }) {
   );
 }
 
+// ── SLIDE 9: PROPOSTA COMERCIAL ──
+function DeckProposta({ active }) {
+  var mesesPiloto = ['JUN\u201926', 'JUL\u201926', 'AGO\u201926'];
+  var mesesEfetivacao = ['SET\u201926', 'OUT\u201926', 'NOV\u201926', 'DEZ\u201926', 'JAN\u201927+'];
+
+  return (
+    <div className="flex-1 flex flex-col bg-bg">
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-6">
+        <div className="max-w-[1200px] w-full mx-auto">
+          <SlideEyebrow active={active} delay={0}>Proposta comercial</SlideEyebrow>
+          <SlideReveal active={active} delay={80}>
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
+              Piloto de 3 meses: <span className="bg-brand-500 text-white px-3 py-0.5 rounded-md">Rabbot absorve o risco de entrada</span>
+            </h2>
+          </SlideReveal>
+          <SlideReveal active={active} delay={140}>
+            <p className="text-sm text-muted mb-6 max-w-[700px]">
+              Mensalidade reduzida durante o piloto. Efetiva&ccedil;&atilde;o mediante avalia&ccedil;&atilde;o conjunta ao final do per&iacute;odo.
+            </p>
+          </SlideReveal>
+
+          {/* Tabela de valores */}
+          <SlideReveal active={active} delay={250}>
+            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-5">
+              {/* Header meses */}
+              <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
+                <div className="border-b border-stone-200/70" />
+                {/* Piloto */}
+                {mesesPiloto.map(function(m, i) { return (
+                  <div key={'p'+i} className="px-2 py-2.5 text-[11px] font-bold uppercase tracking-wide text-brand-700 text-center border-b-2 border-brand-400 bg-brand-50">
+                    {m}
+                  </div>
+                ); })}
+                {/* Efetivacao */}
+                {mesesEfetivacao.map(function(m, i) { return (
+                  <div key={'e'+i} className="px-2 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-stone-400 text-center border-b border-stone-200/70 bg-stone-50/50">
+                    {m}
+                  </div>
+                ); })}
+              </div>
+
+              {/* Fase labels */}
+              <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
+                <div />
+                <div className="col-span-3 text-center py-1">
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-600">&mdash; Piloto &mdash;</span>
+                </div>
+                <div className="col-span-5 text-center py-1">
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-stone-400">&mdash; Efetiva&ccedil;&atilde;o &mdash;</span>
+                </div>
+              </div>
+
+              {/* Plataforma mensal */}
+              <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Plataforma mensal</div>
+                {mesesPiloto.map(function(m, i) { return (
+                  <div key={'pv'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 12k</div>
+                ); })}
+                {mesesEfetivacao.map(function(m, i) { return (
+                  <div key={'ev'+i} className="px-2 py-3 text-center text-[13px] font-semibold text-stone-500">R$ 15k</div>
+                ); })}
+              </div>
+
+              {/* Agente */}
+              <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Agente</div>
+                <div className="col-span-8 px-2 py-3 text-center text-[12px] font-medium text-stone-400 italic">A definir</div>
+              </div>
+
+              {/* Setup */}
+              <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Setup (implementa&ccedil;&atilde;o)</div>
+                <div className="col-span-3 px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 30k</div>
+                <div className="col-span-5 px-2 py-3 text-center" />
+              </div>
+            </div>
+          </SlideReveal>
+
+          {/* Callout investimento */}
+          <SlideReveal active={active} delay={400}>
+            <div className="bg-brand-50 border border-brand-200 rounded-xl px-5 py-3 mb-5">
+              <p className="text-[12px] text-brand-800 leading-relaxed">
+                <span className="font-bold text-brand-700">Investimento Rabbot no piloto:</span> setup de R$ 30k + mensalidade reduzida de R$ 12k/m&ecirc;s durante os 3 meses. Efetiva&ccedil;&atilde;o a R$ 15k/m&ecirc;s a partir de setembro (entrada de manuten&ccedil;&atilde;o + projetos do Brasil).
+              </p>
+            </div>
+          </SlideReveal>
+
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Export ──
 var DECK_SLIDES = [
   { key: 'deck-capa',     title: 'Capa',        render: function(active) { return <DeckCapa active={active} />; } },
@@ -1187,9 +1281,10 @@ var DECK_SLIDES = [
   { key: 'deck-piloto',   title: 'Piloto',       render: function(active) { return <DeckPiloto active={active} />; } },
   { key: 'deck-roi',      title: 'ROI',          render: function(active) { return <DeckROI active={active} />; } },
   { key: 'deck-crono',    title: 'Cronograma',   render: function(active) { return <DeckCrono active={active} />; } },
+  { key: 'deck-proposta', title: 'Proposta',     render: function(active) { return <DeckProposta active={active} />; } },
 ];
 
 Object.assign(window, {
   DECK_SLIDES, DeckCapa, DeckProblema, DeckJornada, DeckSolucao,
-  DeckAgentesVision, DeckPiloto, DeckROI, DeckCrono,
+  DeckAgentesVision, DeckPiloto, DeckROI, DeckCrono, DeckProposta,
 });
