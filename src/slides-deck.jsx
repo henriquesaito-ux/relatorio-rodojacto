@@ -1306,7 +1306,7 @@ function DeckMarco({ active }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   { title: 'Cobertura 24/7', desc: 'Opera dia, noite, feriados e fim de semana. Sem gaps de turno, sem janela cega.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
-                  { title: 'Trabalho de ~2 pessoas', desc: 'Substitui aproximadamente 2 CLTs dedicados ao monitoramento de disponibilidade.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+                  { title: 'Trabalho de ~2 pessoas', desc: 'Substitui aproximadamente 2 CLTs <strong>dedicados</strong> ao monitoramento de disponibilidade.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
                   { title: 'Audit\u00e1vel por padr\u00e3o', desc: 'Cada evento de status \u00e9 registrado, rastre\u00e1vel e revis\u00e1vel. Decis\u00e3o baseada em dado, n\u00e3o em mem\u00f3ria.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' },
                 ].map(function(p, i) { return (
                   <div key={i} className="bg-white border border-stone-200/70 rounded-xl px-5 py-4 flex items-start gap-3.5">
@@ -1336,8 +1336,8 @@ function DeckMarco({ active }) {
                   </div>
                   <ul className="flex flex-col gap-1.5 text-[13px] text-stone-500 list-none m-0 p-0">
                     <li className="flex items-start gap-2"><span className="text-stone-300 mt-0.5">&bull;</span>Por m&ecirc;s, all-in (sal&aacute;rio + encargos + benef&iacute;cios + estrutura)</li>
-                    <li className="flex items-start gap-2"><span className="text-stone-300 mt-0.5">&bull;</span>8h/dia, 22 dias &uacute;teis</li>
-                    <li className="flex items-start gap-2"><span className="text-stone-300 mt-0.5">&bull;</span>Cobre uma fra&ccedil;&atilde;o da opera&ccedil;&atilde;o</li>
+                    <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">8h/dia, 22 dias &uacute;teis</span></li>
+                    <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">Cobre uma fra&ccedil;&atilde;o da opera&ccedil;&atilde;o</span></li>
                     <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">Tira f&eacute;rias, d&aacute; faltas, tem turnover</span></li>
                   </ul>
                 </div>
