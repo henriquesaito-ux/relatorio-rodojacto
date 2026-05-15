@@ -1211,12 +1211,12 @@ function DeckProposta({ active }) {
           <SlideEyebrow active={active} delay={0}>Proposta comercial</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Piloto de 3 meses
+              Prova de valor de 3 meses
             </h2>
           </SlideReveal>
           <SlideReveal active={active} delay={140}>
             <p className="text-sm text-muted mb-6 max-w-[700px]">
-              Mensalidade reduzida durante o piloto. Efetiva&ccedil;&atilde;o mediante avalia&ccedil;&atilde;o conjunta ao final do per&iacute;odo.
+              Mensalidade reduzida durante a prova de valor. Efetiva&ccedil;&atilde;o mediante avalia&ccedil;&atilde;o conjunta ao final do per&iacute;odo.
             </p>
           </SlideReveal>
 
@@ -1226,7 +1226,7 @@ function DeckProposta({ active }) {
               {/* Header meses */}
               <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div className="border-b border-stone-200/70" />
-                {/* Piloto */}
+                {/* Prova de valor */}
                 {mesesPiloto.map(function(m, i) { return (
                   <div key={'p'+i} className="px-2 py-2.5 text-[11px] font-bold uppercase tracking-wide text-brand-700 text-center border-b-2 border-brand-400 bg-brand-50">
                     {m}
@@ -1244,16 +1244,16 @@ function DeckProposta({ active }) {
               <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div />
                 <div className="col-span-3 text-center py-1">
-                  <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-600">&mdash; Piloto &mdash;</span>
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-600">&mdash; Prova de valor &mdash;</span>
                 </div>
                 <div className="col-span-5 text-center py-1">
                   <span className="text-[9px] font-semibold uppercase tracking-wider text-stone-400">&mdash; Efetiva&ccedil;&atilde;o &mdash;</span>
                 </div>
               </div>
 
-              {/* Fundação digital */}
+              {/* Tecnologia D · M */}
               <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Funda&ccedil;&atilde;o digital</div>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Tecnologia D &middot; M</div>
                 {mesesPiloto.map(function(m, i) { return (
                   <div key={'pv'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 12k</div>
                 ); })}
@@ -1410,12 +1410,12 @@ function DeckPropostaFull({ active }) {
           <SlideEyebrow active={active} delay={0}>Proposta comercial consolidada</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Piloto de 3 meses
+              Prova de valor de 3 meses
             </h2>
           </SlideReveal>
           <SlideReveal active={active} delay={140}>
             <p className="text-sm text-muted mb-6 max-w-[700px]">
-              Mensalidade reduzida durante o piloto. Efetiva&ccedil;&atilde;o mediante avalia&ccedil;&atilde;o conjunta ao final do per&iacute;odo.
+              Mensalidade reduzida durante a prova de valor. Efetiva&ccedil;&atilde;o mediante avalia&ccedil;&atilde;o conjunta ao final do per&iacute;odo.
             </p>
           </SlideReveal>
 
@@ -1441,16 +1441,16 @@ function DeckPropostaFull({ active }) {
               <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div />
                 <div className="col-span-3 text-center py-1">
-                  <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-600">&mdash; Piloto &mdash;</span>
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-brand-600">&mdash; Prova de valor &mdash;</span>
                 </div>
                 <div className="col-span-5 text-center py-1">
                   <span className="text-[9px] font-semibold uppercase tracking-wider text-stone-400">&mdash; Efetiva&ccedil;&atilde;o &mdash;</span>
                 </div>
               </div>
 
-              {/* Fundação digital */}
+              {/* Fundação digital (D·M) */}
               <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Funda&ccedil;&atilde;o digital</div>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Funda&ccedil;&atilde;o digital (D&middot;M)</div>
                 {mesesPiloto.map(function(m, i) { return (
                   <div key={'pv'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 12k</div>
                 ); })}
@@ -1490,10 +1490,8 @@ function DeckPropostaFull({ active }) {
 // ── SLIDE TRANSIÇÃO: VISÃO AUKAR ──
 function DeckVisao({ active }) {
   var aspas = [
-    { text: 'Os sistemas que n\u00f3s temos n\u00e3o nos ajudam a ir pra frente. Quando a gente olha um universo de 10 anos, eu n\u00e3o consigo ver a Rodojacto operando com esses sistemas.', highlight: false },
     { text: 'Uma parte voc\u00ea faz no Excel, outra no WhatsApp, outra no e-mail, outra no TMS, outra no WMS. A gente tem um pool de informa\u00e7\u00f5es gigantesco e n\u00e3o consegue consolidar tudo num lugar.', highlight: false },
     { text: 'A gente n\u00e3o consegue fazer gest\u00e3o sem enxergar.', highlight: true },
-    { text: 'Hoje a gente faz 45% das opera\u00e7\u00f5es do grupo. A ideia \u00e9 escalar isso no mercado, fazer disso um laborat\u00f3rio, constru\u00e7\u00e3o de m\u00fasculo.', highlight: false },
     { text: 'Pra gente avan\u00e7ar, vai precisar ser bom com a informa\u00e7\u00e3o. Muita informa\u00e7\u00e3o pra cima, informa\u00e7\u00e3o pra baixo.', highlight: false },
   ];
   return (
@@ -1524,7 +1522,7 @@ function DeckVisao({ active }) {
               </SlideReveal>
               <SlideReveal active={active} delay={220}>
                 <p className="text-[15px] leading-relaxed text-stone-300 max-w-[480px]">
-                  Sair de 45% das opera&ccedil;&otilde;es do Grupo Jato para 100%. Conquistar a certifica&ccedil;&atilde;o SASSMAQ at&eacute; agosto. Virar refer&ecirc;ncia no mercado de transporte. Tudo passa por uma funda&ccedil;&atilde;o digital que sustente os pr&oacute;ximos 10 anos.
+                  Sair de 45% das opera&ccedil;&otilde;es do Grupo Jacto para 100%. Conquistar a certifica&ccedil;&atilde;o SASSMAQ at&eacute; agosto. Virar refer&ecirc;ncia no mercado de transporte. Tudo passa por uma funda&ccedil;&atilde;o digital que sustente os pr&oacute;ximos 10 anos.
                 </p>
               </SlideReveal>
             </div>
@@ -1539,12 +1537,6 @@ function DeckVisao({ active }) {
                   </div>
                 </SlideReveal>
               ); })}
-              {/* Atribuição única */}
-              <SlideReveal active={active} delay={850}>
-                <div className="pl-7 mt-1">
-                  <span className="text-[11px] text-stone-500">&mdash; Marcos Aukar</span>
-                </div>
-              </SlideReveal>
             </div>
 
           </div>
