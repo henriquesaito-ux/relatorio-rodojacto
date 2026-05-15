@@ -122,8 +122,8 @@ function DeckProblema({ active }) {
               <SlideReveal active={active} delay={300}>
                 <div className="grid grid-cols-2 gap-3 mb-5">
                   {[
-                    { tag: 'CUSTO OCULTO', title: 'Carretas paradas sem alerta', desc: 'Carretas no bols\u00e3o Jato ou no p\u00e1tio do cliente \u2014 sem notifica\u00e7\u00e3o, sem prazo, sem cobran\u00e7a.' },
-                    { tag: 'DADO N\u00c3O CONFI\u00c1VEL', title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '\u201cO rastreador diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda.\u201d \u2014 Alessandro' },
+                    { tag: 'CUSTO OCULTO', title: 'Carretas paradas sem alerta', desc: 'Carretas no bols\u00e3o Jacto ou no p\u00e1tio do cliente \u2014 sem notifica\u00e7\u00e3o, sem prazo, sem cobran\u00e7a.' },
+                    { tag: 'DADO N\u00c3O CONFI\u00c1VEL', title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '\u201cO rastreador diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda.\u201d \u2014 M\u00e1rcio T.' },
                   ].map(function(d, i) { return (
                     <div key={i} className="border border-stone-200/70 rounded-lg px-4 py-3.5">
                       <div className="text-[9px] font-bold uppercase tracking-wider text-red-500 mb-1">{d.tag}</div>
@@ -815,15 +815,15 @@ function DeckAgentesVision({ active }) {
 // ── SLIDE 6: PILOTO ──
 function DeckPiloto({ active }) {
   var pairs = [
-    { before: { title: 'Carretas ociosas sem alerta', desc: 'Carretas no bols\u00e3o Jato ou no p\u00e1tio sem notifica\u00e7\u00e3o autom\u00e1tica.', tag: 'Custo de imobiliza\u00e7\u00e3o invis\u00edvel' },
-      after: { title: 'Agente IA monitora carreta parada no cliente', desc: 'Inclui bols\u00e3o Jato com dias de ociosidade.', tag: 'Custo de imobiliza\u00e7\u00e3o eliminado' } },
+    { before: { title: 'Carretas ociosas sem alerta', desc: 'Carretas no bols\u00e3o Jacto ou no p\u00e1tio sem notifica\u00e7\u00e3o autom\u00e1tica.', tag: 'Custo de imobiliza\u00e7\u00e3o invis\u00edvel' },
+      after: { title: 'Agente IA monitora carreta parada no cliente', desc: 'Inclui bols\u00e3o Jacto com dias de ociosidade.', tag: 'Custo de imobiliza\u00e7\u00e3o eliminado' } },
     { before: { title: 'Carretas presas no p\u00e1tio do cliente', desc: 'Sem saber h\u00e1 quantos dias est\u00e1 parada.', tag: 'Custo oculto de imobiliza\u00e7\u00e3o externa' },
       after: { title: 'Dashboard dispon\u00edvel 24/7 por placa', desc: 'Status, MTBF, MTTR e ranking de produtividade em tempo real.', tag: 'Decis\u00e3o baseada em dados' } },
-    { before: { title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '"Diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda." \u2014 Alessandro', tag: 'Dado que n\u00e3o reflete a realidade' },
+    { before: { title: 'Rastreador n\u00e3o \u00e9 fonte de verdade', desc: '"Diz que t\u00e1 dispon\u00edvel, mas a carreta n\u00e3o roda." \u2014 M\u00e1rcio T.', tag: 'Dado que n\u00e3o reflete a realidade' },
       after: { title: 'Kanban como fonte de verdade da frota', desc: 'Status real, independente do rastreador.', tag: 'Dado confi\u00e1vel para decis\u00e3o' } },
     { before: { title: 'Planilha manual de disponibilidade', desc: 'Google Sheets com 200+ carretas atualizada manualmente.', tag: 'Frota vis\u00edvel s\u00f3 pra quem mant\u00e9m a planilha' },
-      after: { title: 'Kanban de disponibilidade em tempo real', desc: 'Alessandro e Marcos Brasil veem toda a frota ao vivo.', tag: 'Substitui a planilha Google Sheets' } },
-    { before: { title: 'Etapa manual que deveria ser autom\u00e1tica', desc: 'Intervalo entre apontamento e abertura de OS depende de a\u00e7\u00e3o humana.', tag: 'Tempo produtivo perdido por Alessandro' },
+      after: { title: 'Kanban de disponibilidade em tempo real', desc: 'M\u00e1rcio T. e Marcos Brasil veem toda a frota ao vivo.', tag: 'Substitui a planilha Google Sheets' } },
+    { before: { title: 'Etapa manual que deveria ser autom\u00e1tica', desc: 'Intervalo entre apontamento e abertura de OS depende de a\u00e7\u00e3o humana.', tag: 'Tempo produtivo perdido' },
       after: { title: 'Abertura autom\u00e1tica de OS + baixa no SAP', desc: 'Integra\u00e7\u00e3o completa em 1 passo.', tag: 'Fim da duplica\u00e7\u00e3o entre sistemas' } },
   ];
 
@@ -1118,6 +1118,7 @@ function DeckCrono({ active }) {
     // Fase 3 — Expansão e consolidação
     { label: 'Fase 3 \u2014 Expans\u00e3o e consolida\u00e7\u00e3o', isGroup: true, color: '#64748b' },
     { label: 'Expans\u00e3o de uso', indent: true, color: '#64748b', start: 6, span: 6 },
+    { label: 'QBR (Revis\u00e3o Trimestral)', indent: true, color: '#64748b', start: 11, span: 1 },
   ];
   return (
     <div className="flex-1 flex flex-col bg-bg">
