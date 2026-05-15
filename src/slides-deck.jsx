@@ -990,22 +990,6 @@ function DeckPiloto({ active }) {
 
 // ── SLIDE 7: ROI ──
 function DeckROI({ active }) {
-  var levers = [
-    { letter: 'D', label: 'Disponibilidade', color: '#479C4A', value: '74.000', sub: '/m\u00eas', premises: [
-      'Carretas indispon\u00edveis/ociosas na opera\u00e7\u00e3o sem visibilidade',
-      'Carretas carregadas usadas como armazenagem \u2014 8 carretas \u00d7 R$ 4.040 = R$ 32k/m\u00eas',
-      '100 dias parados com movimenta\u00e7\u00e3o sem vis\u00e3o; sem controle de n\u00edvel de carregamento (total/parcial)',
-    ] },
-    { letter: 'M', label: 'Manuten\u00e7\u00e3o', color: '#d97706', value: 'a definir', sub: '/m\u00eas', premises: [
-      'Mix atual: 60% corretiva / 40% preventiva',
-      'Objetivo: inverter o ponteiro \u2014 reduzir corretiva, aumentar preventiva',
-      'Menos paradas n\u00e3o programadas = mais disponibilidade',
-    ] },
-    { letter: 'A', label: 'Aquisi\u00e7\u00e3o', color: '#3b82f6', value: 'a definir', sub: '/m\u00eas', premises: [
-      'Redu\u00e7\u00e3o de 6% a 10% em custo de pe\u00e7as',
-      'Cota\u00e7\u00e3o automatizada com ranking por efici\u00eancia',
-    ] },
-  ];
   return (
     <div className="flex-1 flex flex-col bg-white">
       <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 py-8">
@@ -1018,50 +1002,93 @@ function DeckROI({ active }) {
           </SlideReveal>
           <SlideReveal active={active} delay={250}>
             <div className="grid md:grid-cols-3 gap-4 mb-6">
-              {levers.map(function(l, i) { return (
-                <div key={i} className="rounded-xl border-2 p-5 flex flex-col" style={{ borderColor: l.color + '40', background: l.color + '08' }}>
+
+              {/* Card D — Disponibilidade */}
+              <div className="rounded-xl border-2 p-5 flex flex-col" style={{ borderColor: '#479C4A40', background: '#479C4A08' }}>
+                {/* Topo fixo — mesma altura nos 3 cards */}
+                <div style={{ minHeight: '100px' }}>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ background: l.color }}>{l.letter}</span>
-                    <span className="text-sm font-semibold text-ink">{l.label}</span>
+                    <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ background: '#479C4A' }}>D</span>
+                    <span className="text-sm font-semibold text-ink">Disponibilidade</span>
                   </div>
-                  <div className="flex items-baseline gap-1 mb-3">
-                    <span className="text-2xl font-bold tabular-nums" style={{ color: l.color }}>R$ {l.value}</span>
-                    <span className="text-sm text-muted">{l.sub}</span>
-                  </div>
-                  <div className="space-y-1.5 text-xs text-muted border-t pt-2 mt-auto" style={{ borderColor: l.color + '20' }}>
-                    {l.premises.map(function(p, pi) { return (
-                      <div key={pi} className="flex items-start gap-2">
-                        <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: l.color }} />
-                        <span>{p}</span>
-                      </div>
-                    ); })}
-                  </div>
+                  <div className="text-2xl font-bold mb-1" style={{ color: '#479C4A' }}>+1 a 3 carretas</div>
+                  <div className="text-xs text-muted">rodando a mais por m&ecirc;s</div>
                 </div>
-              ); })}
+                {/* Divider + bullets */}
+                <div className="space-y-1.5 text-xs text-muted border-t pt-3" style={{ borderColor: '#479C4A20' }}>
+                  {[
+                    'Carretas indispon\u00edveis/ociosas perdidas nos p\u00e1tios dos clientes',
+                    'Armazenagem do cliente no bols\u00e3o Jacto',
+                    'Sem controle de n\u00edvel de carregamento (total/parcial)',
+                  ].map(function(p, pi) { return (
+                    <div key={pi} className="flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: '#479C4A' }} />
+                      <span>{p}</span>
+                    </div>
+                  ); })}
+                </div>
+              </div>
+
+              {/* Card M — Manutenção */}
+              <div className="rounded-xl border-2 p-5 flex flex-col" style={{ borderColor: '#d9770640', background: '#d9770608' }}>
+                <div style={{ minHeight: '100px' }}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ background: '#d97706' }}>M</span>
+                    <span className="text-sm font-semibold text-ink">Manuten&ccedil;&atilde;o</span>
+                  </div>
+                  <div className="text-2xl font-bold mb-1" style={{ color: '#d97706' }}>+1 a 2 carretas</div>
+                  <div className="text-xs text-muted">destravadas por menos paradas</div>
+                </div>
+                <div className="space-y-1.5 text-xs text-muted border-t pt-3" style={{ borderColor: '#d9770620' }}>
+                  {[
+                    'Mix atual: 60% corretiva / 40% preventiva',
+                    'Objetivo: inverter o ponteiro \u2014 reduzir corretiva, aumentar preventiva',
+                    'Prioriza\u00e7\u00e3o de servi\u00e7os por tipo de carreta',
+                    'Ex: prancha travada esperando manuten\u00e7\u00e3o \u2014 um dia a mais parada',
+                  ].map(function(p, pi) { return (
+                    <div key={pi} className="flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: '#d97706' }} />
+                      <span>{p}</span>
+                    </div>
+                  ); })}
+                </div>
+              </div>
+
+              {/* Card A — Aquisição (apagado, fase futura) */}
+              <div className="rounded-xl border-2 p-5 flex flex-col" style={{ borderColor: '#3b82f620', background: '#3b82f604', opacity: 0.4, filter: 'saturate(0.3)' }}>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ background: '#3b82f6' }}>A</span>
+                  <span className="text-sm font-semibold text-ink">Aquisi&ccedil;&atilde;o</span>
+                </div>
+                <div className="space-y-1.5 text-xs text-muted">
+                  {[
+                    'Redu\u00e7\u00e3o de 6% a 10% em custo de pe\u00e7as',
+                    'Cota\u00e7\u00e3o automatizada com ranking por efici\u00eancia',
+                  ].map(function(p, pi) { return (
+                    <div key={pi} className="flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full mt-1.5 shrink-0" style={{ background: '#3b82f6' }} />
+                      <span>{p}</span>
+                    </div>
+                  ); })}
+                </div>
+                {/* Selo Fase 2 — rodapé */}
+                <div className="mt-auto pt-3">
+                  <span className="text-[9px] font-bold uppercase tracking-wider bg-stone-200 text-stone-500 px-2 py-0.5 rounded-full">Fase 2 &mdash; n&atilde;o incluso nesta proposta</span>
+                </div>
+              </div>
+
             </div>
           </SlideReveal>
+
+          {/* Barra consolidada inferior */}
           <SlideReveal active={active} delay={450}>
-            <div className="rounded-xl p-5" style={{ background: '#1c1917' }}>
-              <div className="flex items-stretch gap-6">
-                {/* Coluna esquerda — Total */}
-                <div className="text-center flex-1">
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Oportunidade total identificada</div>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ 885k</span>
-                    <span className="text-lg text-stone-500">/ano</span>
-                  </div>
-                  <div className="mt-1.5 text-sm text-stone-500">R$ 74k /m&ecirc;s</div>
-                </div>
-                {/* Divider */}
-                <div className="w-px bg-white/10 flex-shrink-0" />
-                {/* Coluna direita — Recuperação Rabbot */}
-                <div className="text-center flex-1">
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Recupera&ccedil;&atilde;o com Rabbot (35% conservador)</div>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ 310k</span>
-                    <span className="text-lg text-stone-500">/ano</span>
-                  </div>
-                  <div className="mt-1.5 text-sm text-stone-500">R$ 26k /m&ecirc;s &mdash; s&oacute; com visibilidade e alertas</div>
+            <div className="rounded-xl px-6 py-5" style={{ background: '#1c1917' }}>
+              <div className="text-center">
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-2">Oportunidade endere&ccedil;&aacute;vel com Rabbot</div>
+                <div className="text-sm text-stone-500 mb-2">1 a 5 carretas a mais &times; R$ 100k de faturamento/carreta</div>
+                <div className="flex items-baseline justify-center gap-2">
+                  <span className="text-3xl md:text-4xl font-bold text-brand-500 tabular-nums">R$ 100k a R$ 500k</span>
+                  <span className="text-lg text-stone-500">/m&ecirc;s</span>
                 </div>
               </div>
             </div>
@@ -1088,22 +1115,17 @@ function DeckCrono({ active }) {
     { label: 'Setup e treinamento', indent: true, color: '#3b82f6', start: 0, span: 3 },
     { label: 'Uso em opera\u00e7\u00e3o', indent: true, color: '#3b82f6', start: 2, span: 3 },
     { label: 'Primeiros resultados (Dashboard)', indent: true, color: '#3b82f6', start: 5, span: 1 },
-    // Fase 3 — Aquisição
-    { label: 'Fase 3 \u2014 Aquisi\u00e7\u00e3o de Pe\u00e7as', isGroup: true, color: '#84cc16' },
-    { label: 'Mapeamento', indent: true, color: '#84cc16', start: 3, span: 1 },
-    { label: 'Kick-off + setup', indent: true, color: '#84cc16', start: 6, span: 1 },
-    { label: 'Treinamento', indent: true, color: '#84cc16', start: 6, span: 2 },
-    { label: 'Uso em opera\u00e7\u00e3o', indent: true, color: '#84cc16', start: 7, span: 4 },
-    { label: 'Primeiros resultados (Dashboard)', indent: true, color: '#84cc16', start: 11, span: 1 },
+    // Fase 3 — Expansão e consolidação
+    { label: 'Fase 3 \u2014 Expans\u00e3o e consolida\u00e7\u00e3o', isGroup: true, color: '#64748b' },
+    { label: 'Expans\u00e3o de uso', indent: true, color: '#64748b', start: 6, span: 6 },
   ];
   return (
     <div className="flex-1 flex flex-col bg-bg">
       <div className="flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-6">
         <div className="max-w-[1200px] w-full mx-auto">
-          <SlideEyebrow active={active} delay={0}>Cronograma de implanta&ccedil;&atilde;o</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
-            <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Em 90 dias, sua opera&ccedil;&atilde;o inteira rodando com a Rabbot.
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-4">
+              Cronograma de implanta&ccedil;&atilde;o
             </h2>
           </SlideReveal>
 
@@ -1161,7 +1183,7 @@ function DeckCrono({ active }) {
               {[
                 { color: '#479C4A', label: 'D \u00b7 Disponibilidade' },
                 { color: '#3b82f6', label: 'M \u00b7 Manuten\u00e7\u00e3o' },
-                { color: '#84cc16', label: 'A \u00b7 Aquisi\u00e7\u00e3o' },
+                { color: '#64748b', label: 'Consolida\u00e7\u00e3o' },
               ].map(function(l, i) { return (
                 <div key={i} className="flex items-center gap-1.5">
                   <span className="w-3 h-2 rounded-full" style={{ background: l.color }} />
@@ -1189,7 +1211,7 @@ function DeckProposta({ active }) {
           <SlideEyebrow active={active} delay={0}>Proposta comercial</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Piloto de 3 meses: <span className="bg-brand-500 text-white px-3 py-0.5 rounded-md">Rabbot absorve o risco de entrada</span>
+              Piloto de 3 meses
             </h2>
           </SlideReveal>
           <SlideReveal active={active} delay={140}>
@@ -1200,7 +1222,7 @@ function DeckProposta({ active }) {
 
           {/* Tabela de valores */}
           <SlideReveal active={active} delay={250}>
-            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-5">
+            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-4">
               {/* Header meses */}
               <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div className="border-b border-stone-200/70" />
@@ -1229,9 +1251,9 @@ function DeckProposta({ active }) {
                 </div>
               </div>
 
-              {/* Plataforma mensal */}
+              {/* Fundação digital */}
               <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Plataforma mensal</div>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Funda&ccedil;&atilde;o digital</div>
                 {mesesPiloto.map(function(m, i) { return (
                   <div key={'pv'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 12k</div>
                 ); })}
@@ -1239,23 +1261,14 @@ function DeckProposta({ active }) {
                   <div key={'ev'+i} className="px-2 py-3 text-center text-[13px] font-semibold text-stone-500">R$ 15k</div>
                 ); })}
               </div>
-
-              {/* Setup */}
-              <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Setup (implementa&ccedil;&atilde;o)</div>
-                <div className="col-span-3 px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 30k</div>
-                <div className="col-span-5 px-2 py-3 text-center" />
-              </div>
             </div>
           </SlideReveal>
 
-          {/* Callout investimento */}
-          <SlideReveal active={active} delay={400}>
-            <div className="bg-brand-50 border border-brand-200 rounded-xl px-5 py-3 mb-5">
-              <p className="text-[12px] text-brand-800 leading-relaxed">
-                <span className="font-bold text-brand-700">Investimento Rabbot no piloto:</span> setup de R$ 30k + mensalidade reduzida de R$ 12k/m&ecirc;s durante os 3 meses. Efetiva&ccedil;&atilde;o a R$ 15k/m&ecirc;s a partir de setembro (entrada de manuten&ccedil;&atilde;o + projetos do Brasil).
-              </p>
-            </div>
+          {/* Setup editorial */}
+          <SlideReveal active={active} delay={350}>
+            <p className="text-[13px] text-muted mb-5">
+              Setup de implanta&ccedil;&atilde;o: <span className="font-semibold text-ink">R$ 30k</span>.
+            </p>
           </SlideReveal>
 
 
@@ -1275,7 +1288,7 @@ function DeckMarco({ active }) {
           {/* HEADER */}
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-8">
-              Conhe&ccedil;a o Marco &mdash; seu monitor de disponibilidade 24/7.
+              Seu agente de IA monitor de disponibilidade 24/7.
             </h2>
           </SlideReveal>
 
@@ -1305,8 +1318,8 @@ function DeckMarco({ active }) {
               <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted mb-4">O que o Marco entrega</div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  { title: 'Cobertura 24/7', desc: 'Opera dia, noite, feriados e fim de semana. Sem gaps de turno, sem janela cega.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
-                  { title: 'Trabalho de ~2 pessoas', desc: 'Substitui aproximadamente 2 CLTs <strong>dedicados</strong> ao monitoramento de disponibilidade.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+                  { title: 'Cobertura 24/7', desc: 'Opera dia, noite, feriados e fim de semana. Garante que nada passa \u2014 todo evento \u00e9 tratado.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+                  { title: 'Trabalho de um time de analistas', desc: 'Substitui o trabalho de um time dedicado ao monitoramento da opera\u00e7\u00e3o, sem turnos, sem f\u00e9rias, sem turnover.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
                   { title: 'Audit\u00e1vel por padr\u00e3o', desc: 'Cada evento de status \u00e9 registrado, rastre\u00e1vel e revis\u00e1vel. Decis\u00e3o baseada em dado, n\u00e3o em mem\u00f3ria.', svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' },
                 ].map(function(p, i) { return (
                   <div key={i} className="bg-white border border-stone-200/70 rounded-xl px-5 py-4 flex items-start gap-3.5">
@@ -1334,8 +1347,8 @@ function DeckMarco({ active }) {
                     <span className="text-[28px] md:text-[32px] font-extrabold text-stone-600 tracking-tight leading-none">R$ 10-12k</span>
                     <span className="text-sm font-semibold text-stone-400 ml-1.5">/ m&ecirc;s</span>
                   </div>
+                  <p className="text-[13px] text-stone-500 mb-3">Custo total CLT, j&aacute; incluindo todos os encargos trabalhistas e previdenci&aacute;rios.</p>
                   <ul className="flex flex-col gap-1.5 text-[13px] text-stone-500 list-none m-0 p-0">
-                    <li className="flex items-start gap-2"><span className="text-stone-300 mt-0.5">&bull;</span>Por m&ecirc;s, all-in (sal&aacute;rio + encargos + benef&iacute;cios + estrutura)</li>
                     <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">8h/dia, 22 dias &uacute;teis</span></li>
                     <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">Cobre uma fra&ccedil;&atilde;o da opera&ccedil;&atilde;o</span></li>
                     <li className="flex items-start gap-2"><span style={{ color: '#B85042' }} className="mt-0.5">&bull;</span><span style={{ color: '#B85042' }} className="font-medium">Tira f&eacute;rias, d&aacute; faltas, tem turnover</span></li>
@@ -1350,36 +1363,28 @@ function DeckMarco({ active }) {
                 {/* Card Marco — pricing visual */}
                 <div className="border-2 border-brand-500 rounded-xl px-5 py-4 flex flex-col bg-brand-50">
                   {/* Tag */}
-                  <div className="mb-1.5">
+                  <div className="mb-3">
                     <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-700">Agente de IA &mdash; Disponibilidade</span>
                   </div>
-                  {/* Subtítulo */}
-                  <div className="text-[13px] font-semibold text-ink mb-2">Paga s&oacute; se trabalhar muito &mdash; com teto</div>
                   {/* Preço */}
                   <div className="mb-3">
-                    <span className="text-[28px] md:text-[32px] font-extrabold text-brand-700 tracking-tight leading-none">R$ 10.000</span>
+                    <span className="text-[28px] md:text-[32px] font-extrabold text-brand-700 tracking-tight leading-none">R$ 10k</span>
                     <span className="text-sm font-semibold text-stone-400 ml-1">/ m&ecirc;s</span>
                   </div>
                   {/* Divider */}
                   <div className="h-px bg-brand-200 mb-3" />
                   {/* Detalhes */}
-                  <div className="flex flex-col gap-1.5 mb-3">
+                  <div className="flex flex-col gap-1.5">
                     {[
-                      { label: 'Mensalidade fixa', value: 'R$ 10.000' },
-                      { label: 'Cota inclusa', value: '1.000 / m\u00eas' },
-                      { label: 'Excedente', value: 'R$ 2,00 / unidade' },
+                      { label: 'Mensalidade fixa', value: 'R$ 10k' },
+                      { label: 'Cota inclusa', value: '2.000 eventos / m\u00eas' },
+                      { label: 'Excedente', value: 'R$ 2,00 / evento' },
                     ].map(function(row, i) { return (
                       <div key={i} className="flex items-center justify-between">
                         <span className="text-[12px] text-muted">{row.label}</span>
                         <span className="text-[12px] font-bold text-ink">{row.value}</span>
                       </div>
                     ); })}
-                  </div>
-                  {/* Pílula teto */}
-                  <div className="mt-auto">
-                    <div className="bg-brand-100 text-brand-700 text-[11px] font-semibold text-center px-4 py-2 rounded-lg">
-                      Teto garantido: R$ 26.000 / m&ecirc;s
-                    </div>
                   </div>
                 </div>
 
@@ -1405,7 +1410,7 @@ function DeckPropostaFull({ active }) {
           <SlideEyebrow active={active} delay={0}>Proposta comercial consolidada</SlideEyebrow>
           <SlideReveal active={active} delay={80}>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.08] text-ink mb-1">
-              Piloto de 3 meses: <span className="bg-brand-500 text-white px-3 py-0.5 rounded-md">Rabbot absorve o risco de entrada</span>
+              Piloto de 3 meses
             </h2>
           </SlideReveal>
           <SlideReveal active={active} delay={140}>
@@ -1416,7 +1421,7 @@ function DeckPropostaFull({ active }) {
 
           {/* Tabela de valores */}
           <SlideReveal active={active} delay={250}>
-            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-5">
+            <div className="bg-white border border-stone-200/70 rounded-xl overflow-hidden mb-4">
               {/* Header meses */}
               <div className="grid" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div className="border-b border-stone-200/70" />
@@ -1443,9 +1448,9 @@ function DeckPropostaFull({ active }) {
                 </div>
               </div>
 
-              {/* Plataforma mensal */}
+              {/* Fundação digital */}
               <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Plataforma mensal</div>
+                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Funda&ccedil;&atilde;o digital</div>
                 {mesesPiloto.map(function(m, i) { return (
                   <div key={'pv'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 12k</div>
                 ); })}
@@ -1457,36 +1462,95 @@ function DeckPropostaFull({ active }) {
               {/* Agente IA Marco */}
               <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
                 <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">
-                  <div>Agente IA Marco<div className="text-[10px] text-muted font-normal">fixo + R$ 2,00/evento</div></div>
+                  Agente IA Marco
                 </div>
                 {mesesPiloto.map(function(m, i) { return (
-                  <div key={'am'+i} className="px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 10k</div>
+                  <div key={'am'+i} className="px-2 py-3 text-center text-[12px] text-stone-300">&mdash;</div>
                 ); })}
                 {mesesEfetivacao.map(function(m, i) { return (
                   <div key={'ae'+i} className="px-2 py-3 text-center text-[13px] font-semibold text-stone-500">R$ 10k</div>
                 ); })}
               </div>
-
-              {/* Setup */}
-              <div className="grid border-t border-stone-100" style={{ gridTemplateColumns: '180px repeat(8, 1fr)' }}>
-                <div className="px-4 py-3 text-[12px] font-medium text-stone-600 flex items-center">Setup (implementa&ccedil;&atilde;o)</div>
-                <div className="col-span-3 px-2 py-3 text-center text-[13px] font-bold text-brand-600">R$ 30k</div>
-                <div className="col-span-5 px-2 py-3 text-center" />
-              </div>
             </div>
           </SlideReveal>
 
-          {/* Callout investimento */}
-          <SlideReveal active={active} delay={400}>
-            <div className="bg-brand-50 border border-brand-200 rounded-xl px-5 py-3 mb-5">
-              <p className="text-[12px] text-brand-800 leading-relaxed">
-                <span className="font-bold text-brand-700">Investimento Rabbot no piloto:</span> setup de R$ 30k + plataforma R$ 12k/m&ecirc;s + Agente Marco R$ 10k/m&ecirc;s (fixo + R$ 2,00/evento) durante os 3 meses. Efetiva&ccedil;&atilde;o da plataforma a R$ 15k/m&ecirc;s a partir de setembro (entrada de manuten&ccedil;&atilde;o + projetos do Brasil).
-              </p>
-            </div>
+          {/* Setup editorial */}
+          <SlideReveal active={active} delay={350}>
+            <p className="text-[13px] text-muted mb-5">
+              Setup de implanta&ccedil;&atilde;o: <span className="font-semibold text-ink">R$ 30k</span>.
+            </p>
           </SlideReveal>
 
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── SLIDE TRANSIÇÃO: VISÃO AUKAR ──
+function DeckVisao({ active }) {
+  var aspas = [
+    { text: 'Os sistemas que n\u00f3s temos n\u00e3o nos ajudam a ir pra frente. Quando a gente olha um universo de 10 anos, eu n\u00e3o consigo ver a Rodojacto operando com esses sistemas.', highlight: false },
+    { text: 'Uma parte voc\u00ea faz no Excel, outra no WhatsApp, outra no e-mail, outra no TMS, outra no WMS. A gente tem um pool de informa\u00e7\u00f5es gigantesco e n\u00e3o consegue consolidar tudo num lugar.', highlight: false },
+    { text: 'A gente n\u00e3o consegue fazer gest\u00e3o sem enxergar.', highlight: true },
+    { text: 'Hoje a gente faz 45% das opera\u00e7\u00f5es do grupo. A ideia \u00e9 escalar isso no mercado, fazer disso um laborat\u00f3rio, constru\u00e7\u00e3o de m\u00fasculo.', highlight: false },
+    { text: 'Pra gente avan\u00e7ar, vai precisar ser bom com a informa\u00e7\u00e3o. Muita informa\u00e7\u00e3o pra cima, informa\u00e7\u00e3o pra baixo.', highlight: false },
+  ];
+  return (
+    <div className="flex-1 flex flex-col relative overflow-hidden">
+      {/* Background image + overlay */}
+      <div className="absolute inset-0">
+        <img src="assets/blitz-03.jpeg" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.82) 50%, rgba(0,0,0,0.85) 100%)' }} />
+      </div>
+
+      {/* Conteúdo */}
+      <div className="flex-1 flex flex-col justify-center relative z-10 px-8 md:px-16 lg:px-20 py-10">
+        <div className="max-w-5xl w-full mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[50%_50%] gap-10 lg:gap-14 items-center">
+
+            {/* Lado esquerdo — headline */}
+            <div>
+              <SlideReveal active={active} delay={0}>
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="h-px w-10 bg-white/60" />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/80">Pr&oacute;ximo passo</span>
+                </div>
+              </SlideReveal>
+              <SlideReveal active={active} delay={120}>
+                <h2 className="text-2xl md:text-3xl lg:text-[34px] font-semibold leading-[1.15] tracking-tight text-white mb-6">
+                  &ldquo;O que levou a Rodojacto at&eacute; aqui n&atilde;o &eacute; o que vai levar para o pr&oacute;ximo n&iacute;vel.&rdquo;
+                </h2>
+              </SlideReveal>
+              <SlideReveal active={active} delay={220}>
+                <p className="text-[15px] leading-relaxed text-stone-300 max-w-[480px]">
+                  Sair de 45% das opera&ccedil;&otilde;es do Grupo Jato para 100%. Conquistar a certifica&ccedil;&atilde;o SASSMAQ at&eacute; agosto. Virar refer&ecirc;ncia no mercado de transporte. Tudo passa por uma funda&ccedil;&atilde;o digital que sustente os pr&oacute;ximos 10 anos.
+                </p>
+              </SlideReveal>
+            </div>
+
+            {/* Lado direito — 5 aspas do Aukar */}
+            <div className="flex flex-col gap-5">
+              {aspas.map(function(a, i) { return (
+                <SlideReveal key={i} active={active} delay={300 + i * 100}>
+                  <div className="relative pl-7">
+                    <span className="absolute left-0 top-0 text-2xl font-serif leading-none text-brand-500/40">&laquo;</span>
+                    <p className={'italic leading-relaxed ' + (a.highlight ? 'text-[17px] font-semibold text-white' : 'text-[14px] text-white/85')}>{a.text}</p>
+                  </div>
+                </SlideReveal>
+              ); })}
+              {/* Atribuição única */}
+              <SlideReveal active={active} delay={850}>
+                <div className="pl-7 mt-1">
+                  <span className="text-[11px] text-stone-500">&mdash; Marcos Aukar</span>
+                </div>
+              </SlideReveal>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
@@ -1500,13 +1564,14 @@ var DECK_SLIDES = [
   { key: 'deck-agentes',  title: 'Time IA',      render: function(active) { return <DeckAgentesVision active={active} />; } },
   { key: 'deck-piloto',   title: 'Piloto',       render: function(active) { return <DeckPiloto active={active} />; } },
   { key: 'deck-roi',      title: 'ROI',          render: function(active) { return <DeckROI active={active} />; } },
-  { key: 'deck-crono',    title: 'Cronograma',   render: function(active) { return <DeckCrono active={active} />; } },
+  { key: 'deck-visao',    title: 'Vis\u00e3o',       render: function(active) { return <DeckVisao active={active} />; } },
   { key: 'deck-proposta', title: 'Proposta',     render: function(active) { return <DeckProposta active={active} />; } },
   { key: 'deck-marco',    title: 'Marco',       render: function(active) { return <DeckMarco active={active} />; } },
   { key: 'deck-proposta-full', title: 'Proposta Consolidada', render: function(active) { return <DeckPropostaFull active={active} />; } },
+  { key: 'deck-crono',    title: 'Cronograma',   render: function(active) { return <DeckCrono active={active} />; } },
 ];
 
 Object.assign(window, {
   DECK_SLIDES, DeckCapa, DeckProblema, DeckJornada, DeckSolucao,
-  DeckAgentesVision, DeckPiloto, DeckROI, DeckCrono, DeckProposta, DeckMarco, DeckPropostaFull,
+  DeckAgentesVision, DeckPiloto, DeckROI, DeckVisao, DeckCrono, DeckProposta, DeckMarco, DeckPropostaFull,
 });
