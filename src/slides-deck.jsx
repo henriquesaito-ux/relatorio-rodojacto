@@ -1523,7 +1523,7 @@ function DeckVisao({ active }) {
               </SlideReveal>
               <SlideReveal active={active} delay={220}>
                 <p className="text-[15px] leading-relaxed text-stone-300 max-w-[480px]">
-                  Sair de 45% das opera&ccedil;&otilde;es do Grupo Jacto para 100%. Conquistar a certifica&ccedil;&atilde;o SASSMAQ at&eacute; agosto. Virar refer&ecirc;ncia no mercado de transporte. Tudo passa por uma funda&ccedil;&atilde;o digital que sustente os pr&oacute;ximos 10 anos.
+                  Sair de 45% das opera&ccedil;&otilde;es do Grupo Jacto para 100%. Virar refer&ecirc;ncia no mercado de transporte. Tudo passa por uma funda&ccedil;&atilde;o digital que sustente os pr&oacute;ximos 10 anos.
                 </p>
               </SlideReveal>
             </div>
